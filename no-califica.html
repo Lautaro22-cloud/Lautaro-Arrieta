@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gracias por completar la ficha | Lautaro Arrieta</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script>
+window.CONFIG = {
+  PIXEL_ID: "",            // mismo ID que en index.html
+  RECURSO_URL: "#",        // link a la guía de objetivo de campaña (o el recurso que elijas)
+  INSTAGRAM_URL: "https://www.instagram.com/lautaroarrietaok/"
+};
+</script>
+<script>
+(function(){
+  var id = window.CONFIG.PIXEL_ID;
+  if(!id){ window.fbq = function(){}; return; }
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', id);
+  fbq('track', 'PageView');
+})();
+</script>
+
+<style>
+:root{
+  --paper:#F3F5F2;--paper-2:#E7ECE8;--ink:#10201F;--pine:#0F4C47;--pine-deep:#0A3632;
+  --amber:#E8A33A;--amber-deep:#C9861F;--muted:#56676A;--line:#CFD8D4;--white:#FFFFFF;
+  --radius-lg:22px;--radius-sm:10px;
+  --font:"Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px;border-radius:4px}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+.top{padding:22px 0}
+.brand{font-weight:800;font-size:17px;color:var(--ink);text-decoration:none}
+.brand small{display:block;font-weight:500;font-size:13px;color:var(--muted)}
+h1{margin-top:40px;font-size:clamp(30px,4.6vw,48px);line-height:1.06;letter-spacing:-.035em;font-weight:800;max-width:18ch}
+.lead{margin-top:18px;font-size:19px;color:var(--muted);max-width:58ch}
+.card{margin-top:40px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);padding:30px}
+.card h2{font-size:22px;letter-spacing:-.02em;line-height:1.2}
+.card p{margin-top:8px;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;margin-top:20px;font:inherit;font-weight:700;font-size:17px;padding:15px 24px;border-radius:var(--radius-sm);background:var(--amber);color:var(--ink);text-decoration:none}
+.btn:hover{background:var(--amber-deep)}
+.alt{margin-top:28px;color:var(--muted)}
+.alt a{color:var(--pine);font-weight:600}
+footer{margin-top:72px;padding:32px 0 48px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+@media (max-width:520px){.wrap{padding:0 16px}.card{padding:22px}.btn{width:100%}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="index.html">Lautaro Arrieta<small>Sistema de Adquisición Predecible™</small></a></div></header>
+
+<main class="wrap">
+  <h1>Gracias por completar la ficha. Por ahora, el diagnóstico no es el paso que te sirve.</h1>
+  <p class="lead">El diagnóstico está pensado para profesionales que ya venden un programa high ticket. Por lo que contaste, todavía estás en una etapa anterior, y una llamada conmigo no te va a dar lo que necesitás hoy. Prefiero decírtelo ahora antes que hacerte perder 45 minutos.</p>
+
+  <div class="card">
+    <h2>Empezá por acá: cómo elegir el objetivo de campaña correcto</h2>
+    <p>Es el error más caro que veo en profesionales que empiezan con anuncios: elegir mensajes o alcance cuando lo que necesitan son agendas. Esta guía te explica cuál usar y por qué, para que cuando actives tu pauta no tires la plata.</p>
+    <a class="btn" id="recurso" href="#" target="_blank" rel="noopener">Ver la guía gratis</a>
+  </div>
+
+  <p class="alt">Y si querés seguir aprendiendo cómo se arma un sistema de adquisición, en mi Instagram lo explico todas las semanas: <a id="ig" href="#" target="_blank" rel="noopener">@lautaroarrietaok</a>. Cuando tengas tu programa vendiendo, volvé a completar la ficha.</p>
+</main>
+
+<footer><div class="wrap">© Lautaro Arrieta</div></footer>
+
+<script>
+document.getElementById('recurso').href = window.CONFIG.RECURSO_URL;
+document.getElementById('ig').href = window.CONFIG.INSTAGRAM_URL;
+</script>
+</body>
+</html>

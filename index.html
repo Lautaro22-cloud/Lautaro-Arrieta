@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diagnóstico de tu Sistema de Adquisición | Lautaro Arrieta</title>
+<meta name="description" content="Para profesionales que ya venden un programa high ticket. Revisamos tu mensaje, tu estructura y tu filtrado, y te llevás qué corregir antes de pautar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script>
+/* =========================================================
+   CONFIGURACIÓN — completá estos valores antes de publicar
+   ========================================================= */
+window.CONFIG = {
+  PIXEL_ID: "",            // ID del Meta Pixel. Vacío = no se carga el pixel.
+  CALENDLY_URL: "https://calendly.com/lautaro-trafficker/auditoria-gratuita-consigue-clientes-high-ticket-1",
+  SHEETS_ENDPOINT: "https://script.google.com/macros/s/AKfycby8i2mWuQ67f2Sq6nW4flzPD-CMUqvVa_8H1kKQwDm1amWKdQeN_scOVzRBo-ZO8CQq/exec",     // URL de la Web App de Apps Script que guarda los leads. Vacío = no se envía.
+  WHATSAPP_NUMERO: "5491135574708", // tu WhatsApp sin + ni espacios
+  WHATSAPP_MENSAJE: "Hola Lautaro! Vi tu video y quiero hacerte una consulta sobre mi sistema de adquisición.",
+  GRACIAS_URL: "gracias.html",
+  NO_CALIFICA_URL: "no-califica.html"
+};
+</script>
+
+<!-- Meta Pixel -->
+<script>
+(function(){
+  var id = window.CONFIG.PIXEL_ID;
+  if(!id){ window.fbq = function(){}; return; }
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', id);
+  fbq('track', 'PageView');
+})();
+</script>
+
+<style>
+:root{
+  --paper:#F3F5F2;
+  --paper-2:#E7ECE8;
+  --ink:#10201F;
+  --pine:#0F4C47;
+  --pine-deep:#0A3632;
+  --amber:#E8A33A;
+  --amber-deep:#C9861F;
+  --muted:#56676A;
+  --line:#CFD8D4;
+  --white:#FFFFFF;
+  --error:#B3261E;
+  --radius-lg:22px;
+  --radius-sm:10px;
+  --font:"Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img,iframe{display:block;max-width:100%}
+a{color:var(--pine)}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px;border-radius:4px}
+.wrap{width:100%;max-width:1160px;margin:0 auto;padding:0 20px}
+
+/* ---------- Top bar ---------- */
+.top{padding:22px 0}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-weight:800;font-size:17px;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.brand small{display:block;font-weight:500;font-size:13px;color:var(--muted);letter-spacing:0}
+.top-link{font-size:15px;font-weight:600;color:var(--pine);text-decoration:none;border-bottom:2px solid var(--amber);padding-bottom:2px}
+
+/* ---------- Hero ---------- */
+.hero{padding:28px 0 72px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,460px);gap:56px;align-items:start}
+.hero h1{font-size:clamp(34px,4.6vw,58px);line-height:1.02;letter-spacing:-.035em;font-weight:800;max-width:15ch}
+.hero .lead{margin-top:22px;font-size:clamp(17px,1.6vw,20px);color:var(--muted);max-width:52ch}
+.hero .lead strong{color:var(--ink);font-weight:600}
+/* Video player (vertical by default; adapts to the video's real ratio) */
+.vid{margin:0;width:100%;max-width:330px;display:grid;gap:14px}
+.vid.wide{max-width:100%}
+.vid-title{font-size:17px;font-weight:700;letter-spacing:-.01em;line-height:1.3;color:var(--ink);text-wrap:balance}
+.vid-frame{position:relative;width:100%;max-width:100%;aspect-ratio:9/16;border-radius:var(--radius-lg);overflow:hidden;background:var(--pine-deep)}
+.vid-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid-sound{position:absolute;left:50%;bottom:64px;transform:translateX(-50%);display:inline-flex;align-items:center;gap:8px;font:inherit;font-weight:700;font-size:15px;padding:10px 16px;border:0;border-radius:999px;background:var(--amber);color:var(--ink);cursor:pointer;box-shadow:0 8px 24px -8px rgba(0,0,0,.5);white-space:nowrap}
+.vid-sound::before{content:"";width:0;height:0;border-right:9px solid var(--ink);border-top:7px solid transparent;border-bottom:7px solid transparent;box-shadow:-4px 0 0 0 var(--ink)}
+.vid-sound[hidden]{display:none}
+.vid-cta{display:grid;gap:10px}
+.vid-cta[hidden]{display:none}
+.vid-cta.show{animation:rise .35s ease-out}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.btn.btn-wa{background:transparent;color:var(--pine);border:1.5px solid var(--pine)}
+.btn.btn-wa:hover{background:#E2EEEA}
+.hero .vid{margin-top:32px}
+.proof-line{margin-top:18px;font-size:15px;color:var(--muted)}
+.proof-line b{color:var(--ink)}
+
+/* ---------- Ficha (form) ---------- */
+.ficha{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:0 30px 60px -40px rgba(15,76,71,.45);position:sticky;top:20px;overflow:hidden}
+.ficha-head{background:var(--pine);color:var(--white);padding:22px 26px 20px}
+.ficha-head h2{font-size:22px;letter-spacing:-.02em;font-weight:700}
+.ficha-head p{font-size:14px;color:#CFE0DB;margin-top:4px}
+.steps{display:flex;gap:6px;margin-top:16px}
+.steps span{height:5px;flex:1;border-radius:3px;background:rgba(255,255,255,.22)}
+.steps span.on{background:var(--amber)}
+.ficha-body{padding:24px 26px 26px}
+.q{margin-bottom:20px;border:0}
+.q > label, .q > legend{display:flex;gap:10px;font-weight:600;font-size:15.5px;line-height:1.35;margin-bottom:10px;color:var(--ink)}
+.q .n{flex:none;width:24px;height:24px;border-radius:50%;background:var(--paper-2);color:var(--pine);font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
+.q input[type=text],.q input[type=email],.q input[type=tel]{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1.5px solid var(--line);border-radius:var(--radius-sm);background:var(--paper);color:var(--ink)}
+.q input:focus{outline:none;border-color:var(--pine);background:var(--white)}
+.opts{display:grid;gap:8px}
+.opts.two{grid-template-columns:1fr 1fr}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.opt span{display:block;padding:11px 13px;border:1.5px solid var(--line);border-radius:var(--radius-sm);font-size:15px;background:var(--paper);cursor:pointer;transition:border-color .15s,background .15s}
+.opt input:checked + span{border-color:var(--pine);background:#E2EEEA;font-weight:600}
+.opt input:focus-visible + span{outline:3px solid var(--amber);outline-offset:2px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.err{display:none;color:var(--error);font-size:14px;margin-top:6px}
+.q.invalid .err{display:block}
+.q.invalid input[type=text],.q.invalid input[type=email],.q.invalid input[type=tel]{border-color:var(--error)}
+.btn{display:inline-flex;align-items:center;justify-content:center;width:100%;text-decoration:none;font:inherit;font-weight:700;font-size:17px;padding:16px 20px;border:0;border-radius:var(--radius-sm);background:var(--amber);color:var(--ink);cursor:pointer;transition:background .15s}
+.btn:hover{background:var(--amber-deep)}
+.btn[disabled]{opacity:.6;cursor:wait}
+.fine{font-size:13px;color:var(--muted);margin-top:12px;text-align:center}
+.nav-row{display:flex;gap:10px}
+.nav-row .back{flex:0 0 auto;width:auto;background:var(--paper-2);color:var(--ink);padding:16px 18px}
+.nav-row .back:hover{background:var(--line)}
+.page[hidden]{display:none}
+
+/* Calendly step */
+#cal-step[hidden]{display:none}
+.cal-intro{padding:22px 26px 6px}
+.cal-intro h3{font-size:20px;letter-spacing:-.02em}
+.cal-intro p{font-size:15px;color:var(--muted);margin-top:4px}
+#calendly{min-width:280px;height:700px}
+
+/* ---------- Sections ---------- */
+section.block{padding:84px 0;border-top:1px solid var(--line)}
+.block h2{font-size:clamp(28px,3.4vw,42px);line-height:1.08;letter-spacing:-.03em;font-weight:800;max-width:22ch}
+.block .sub{margin-top:14px;color:var(--muted);max-width:60ch;font-size:18px}
+
+/* Case */
+.case{background:var(--pine);color:var(--white);border-top:0}
+.case h2{color:var(--white)}
+.case .sub{color:#CFE0DB}
+.case-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:48px;margin-top:44px;align-items:start}
+.case .vid-title{color:var(--white)}
+.case .vid-frame{border:1px solid rgba(255,255,255,.12)}
+.case .btn.btn-wa{color:var(--white);border-color:rgba(255,255,255,.6)}
+.case .btn.btn-wa:hover{background:rgba(255,255,255,.08)}
+.case-more{display:grid;grid-template-columns:repeat(2,minmax(0,330px));gap:48px;margin-top:64px;padding-top:48px;border-top:1px solid rgba(255,255,255,.14)}
+.timeline{list-style:none;display:grid;gap:0}
+.timeline li{padding:20px 0 20px 26px;border-left:2px solid rgba(255,255,255,.18);position:relative}
+.timeline li::before{content:"";position:absolute;left:-7px;top:26px;width:12px;height:12px;border-radius:50%;background:var(--pine);border:2px solid var(--amber)}
+.timeline li:last-child::before{background:var(--amber)}
+.timeline h3{font-size:14px;font-weight:700;color:var(--amber);letter-spacing:.01em}
+.timeline p{margin-top:6px;color:#E4EEEA;font-size:16px}
+.result{margin-top:10px;font-size:clamp(26px,3vw,36px);font-weight:800;letter-spacing:-.03em;line-height:1.1;color:var(--white)}
+.result-sub{margin-top:8px;color:#CFE0DB;font-size:15.5px}
+
+/* Fit */
+.fit-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:40px}
+.fit{border-radius:var(--radius-lg);padding:28px}
+.fit.yes{background:var(--white);border:1px solid var(--line)}
+.fit.no{background:var(--paper-2)}
+.fit h3{font-size:19px;letter-spacing:-.01em;margin-bottom:14px}
+.fit ul{list-style:none;display:grid;gap:12px}
+.fit li{padding-left:28px;position:relative;font-size:16px}
+.fit.yes li::before{content:"";position:absolute;left:0;top:7px;width:14px;height:8px;border-left:2.5px solid var(--pine);border-bottom:2.5px solid var(--pine);transform:rotate(-45deg)}
+.fit.no li::before,.fit.no li::after{content:"";position:absolute;left:2px;top:11px;width:13px;height:2.5px;background:var(--muted);transform:rotate(45deg)}
+.fit.no li::after{transform:rotate(-45deg)}
+
+/* FAQ */
+.faq{margin-top:36px;max-width:820px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:22px 40px 22px 0;font-weight:700;font-size:18px;letter-spacing:-.01em;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";position:absolute;right:6px;top:50%;width:12px;height:12px;margin-top:-9px;border-right:2.5px solid var(--pine);border-bottom:2.5px solid var(--pine);transform:rotate(45deg);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(-135deg);margin-top:-3px}
+.faq details p{padding:0 0 22px;color:var(--muted);max-width:68ch}
+
+/* Final CTA */
+.final{text-align:left}
+.final .wrap{display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.final .btn{width:auto;padding:18px 30px}
+
+footer{padding:36px 0 48px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:var(--muted)}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 940px){
+  .hero-grid{grid-template-columns:1fr;gap:32px}
+  .ficha{position:static}
+  .case-grid{grid-template-columns:1fr}
+  .case-more{grid-template-columns:minmax(0,330px)}
+  .fit-grid{grid-template-columns:1fr}
+}
+@media (max-width: 520px){
+  body{font-size:16px}
+  .wrap{padding:0 16px}
+  .hero{padding:12px 0 56px}
+  .vid{max-width:280px;margin-left:auto;margin-right:auto}
+  .hero .vid{margin-top:24px}
+  .case-more{justify-content:center;grid-template-columns:minmax(0,280px)}
+  .ficha-head,.ficha-body,.cal-intro{padding-left:18px;padding-right:18px}
+  .opts.two,.row2{grid-template-columns:1fr}
+  section.block{padding:64px 0}
+  .final .btn{width:100%}
+  #calendly{height:1000px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">Lautaro Arrieta<small>Sistema de Adquisición Predecible™</small></a>
+    <a class="top-link" href="#ficha">Reservar diagnóstico</a>
+  </div>
+</header>
+
+<main>
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Tu programa funciona. Lo que no funciona es cómo te llegan los clientes.</h1>
+        <p class="lead">Diagnóstico gratuito para <strong>profesionales que ya venden un programa high ticket</strong>. En 45 minutos revisamos tu mensaje, tu estructura y tu filtrado, y te llevás qué corregir antes de invertir un peso más en anuncios.</p>
+
+        <figure class="vid">
+          <figcaption class="vid-title">Mirá esto antes de completar la ficha</figcaption>
+          <div class="vid-frame">
+            <iframe src="https://player.vimeo.com/video/1241340194?badge=0&amp;autopause=0&amp;playsinline=1&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Bienvenida al diagnóstico"></iframe>
+            <button type="button" class="vid-sound" hidden>Tocá para escuchar</button>
+          </div>
+          <div class="vid-cta" hidden>
+            <a class="btn" href="#ficha" data-cta="ficha">Agendar mi diagnóstico</a>
+            <a class="btn btn-wa" href="#" target="_blank" rel="noopener" data-cta="wa">Escribirme por WhatsApp</a>
+          </div>
+        </figure>
+        <p class="proof-line">Con este sistema, una profesora de inglés para profesionales senior facturó <b>más de USD 30.000</b> desde que trabajamos juntos.</p>
+      </div>
+
+      <!-- ================= FICHA ================= -->
+      <aside class="ficha" id="ficha" aria-labelledby="ficha-title">
+        <div class="ficha-head">
+          <h2 id="ficha-title">Ficha de diagnóstico</h2>
+          <p id="ficha-sub">Completala en 2 minutos. Si hay fit, elegís el horario acá mismo.</p>
+          <div class="steps" aria-hidden="true"><span class="on" id="s1"></span><span id="s2"></span><span id="s3"></span></div>
+        </div>
+
+        <form id="form" class="ficha-body" novalidate>
+          <!-- Página 1: tu programa -->
+          <div class="page" data-page="1">
+            <div class="q" data-name="profesion">
+              <label for="profesion"><span class="n">1</span>¿A qué te dedicás?</label>
+              <input id="profesion" name="profesion" type="text" placeholder="Ej.: nutricionista, profesora de inglés" autocomplete="organization-title">
+              <p class="err">Contanos a qué te dedicás.</p>
+            </div>
+
+            <fieldset class="q" data-name="programa">
+              <legend><span class="n">2</span>¿Tenés un programa high ticket armado?</legend>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="programa" value="si_vendido"><span>Sí, y ya lo vendí</span></label>
+                <label class="opt"><input type="radio" name="programa" value="si_sin_vender"><span>Sí, pero todavía no lo vendí</span></label>
+                <label class="opt"><input type="radio" name="programa" value="sesiones"><span>No, vendo sesiones sueltas</span></label>
+              </div>
+              <p class="err">Elegí una opción.</p>
+            </fieldset>
+
+            <fieldset class="q" data-name="precio">
+              <legend><span class="n">3</span>¿Cuánto cuesta tu programa?</legend>
+              <div class="opts two">
+                <label class="opt"><input type="radio" name="precio" value="menos_500"><span>Menos de USD 500</span></label>
+                <label class="opt"><input type="radio" name="precio" value="500_1000"><span>USD 500 a 1.000</span></label>
+                <label class="opt"><input type="radio" name="precio" value="1000_2000"><span>USD 1.000 a 2.000</span></label>
+                <label class="opt"><input type="radio" name="precio" value="mas_2000"><span>Más de USD 2.000</span></label>
+              </div>
+              <p class="err">Elegí una opción.</p>
+            </fieldset>
+
+            <button type="button" class="btn" data-next="2">Seguir</button>
+          </div>
+
+          <!-- Página 2: tu adquisición hoy -->
+          <div class="page" data-page="2" hidden>
+            <fieldset class="q" data-name="facturacion">
+              <legend><span class="n">4</span>¿Cuánto facturás por mes hoy?</legend>
+              <div class="opts two">
+                <label class="opt"><input type="radio" name="facturacion" value="menos_1k"><span>Menos de USD 1.000</span></label>
+                <label class="opt"><input type="radio" name="facturacion" value="1k_3k"><span>USD 1.000 a 3.000</span></label>
+                <label class="opt"><input type="radio" name="facturacion" value="3k_5k"><span>USD 3.000 a 5.000</span></label>
+                <label class="opt"><input type="radio" name="facturacion" value="mas_5k"><span>Más de USD 5.000</span></label>
+              </div>
+              <p class="err">Elegí una opción.</p>
+            </fieldset>
+
+            <fieldset class="q" data-name="origen">
+              <legend><span class="n">5</span>¿Cómo te llegan hoy la mayoría de tus clientes?</legend>
+              <div class="opts two">
+                <label class="opt"><input type="radio" name="origen" value="recomendacion"><span>Recomendaciones</span></label>
+                <label class="opt"><input type="radio" name="origen" value="organico"><span>Contenido orgánico</span></label>
+                <label class="opt"><input type="radio" name="origen" value="anuncios"><span>Anuncios</span></label>
+                <label class="opt"><input type="radio" name="origen" value="otro"><span>Otro</span></label>
+              </div>
+              <p class="err">Elegí una opción.</p>
+            </fieldset>
+
+            <fieldset class="q" data-name="ads">
+              <legend><span class="n">6</span>¿Ya invertiste en anuncios?</legend>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="ads" value="no"><span>No, nunca</span></label>
+                <label class="opt"><input type="radio" name="ads" value="promocionar"><span>Sí, con el botón promocionar</span></label>
+                <label class="opt"><input type="radio" name="ads" value="admin"><span>Sí, desde el administrador de anuncios</span></label>
+              </div>
+              <p class="err">Elegí una opción.</p>
+            </fieldset>
+
+            <div class="nav-row">
+              <button type="button" class="btn back" data-prev="1">Atrás</button>
+              <button type="button" class="btn" data-next="3">Seguir</button>
+            </div>
+          </div>
+
+          <!-- Página 3: compromiso y contacto -->
+          <div class="page" data-page="3" hidden>
+            <fieldset class="q" data-name="inversion">
+              <legend><span class="n">7</span>Si vemos que hay fit, ¿estás en condiciones de invertir en resolverlo en los próximos 30 días?</legend>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="inversion" value="si"><span>Sí, si veo que tiene sentido</span></label>
+                <label class="opt"><input type="radio" name="inversion" value="no"><span>No por ahora, solo quiero información</span></label>
+              </div>
+              <p class="err">Elegí una opción.</p>
+            </fieldset>
+
+            <div class="q" data-name="nombre">
+              <label for="nombre"><span class="n">8</span>Tus datos</label>
+              <input id="nombre" name="nombre" type="text" placeholder="Nombre y apellido" autocomplete="name">
+              <p class="err">Completá tu nombre.</p>
+            </div>
+            <div class="q" data-name="email">
+              <input id="email" name="email" type="email" placeholder="Email" autocomplete="email" aria-label="Email">
+              <p class="err">Ingresá un email válido.</p>
+            </div>
+            <div class="row2">
+              <div class="q" data-name="whatsapp">
+                <input id="whatsapp" name="whatsapp" type="tel" placeholder="WhatsApp con código de país" autocomplete="tel" aria-label="WhatsApp">
+                <p class="err">Ingresá tu WhatsApp.</p>
+              </div>
+              <div class="q" data-name="instagram">
+                <input id="instagram" name="instagram" type="text" placeholder="@instagram" aria-label="Instagram">
+                <p class="err">Ingresá tu Instagram.</p>
+              </div>
+            </div>
+
+            <div class="nav-row">
+              <button type="button" class="btn back" data-prev="2">Atrás</button>
+              <button type="submit" class="btn" id="submit">Ver horarios disponibles</button>
+            </div>
+            <p class="fine">Tus datos se usan solo para preparar tu diagnóstico.</p>
+          </div>
+        </form>
+
+        <!-- Paso agenda (se muestra solo si califica) -->
+        <div id="cal-step" hidden>
+          <div class="cal-intro">
+            <h3>Hay fit. Elegí tu horario.</h3>
+            <p>El diagnóstico dura 45 minutos y es por videollamada.</p>
+          </div>
+          <div id="calendly"></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ================= CASO ================= -->
+  <section class="block case" id="caso">
+    <div class="wrap">
+      <h2>No era un problema de anuncios. Era un problema de orden.</h2>
+      <p class="sub">El caso de Ailén, profesora de inglés para profesionales senior. Tenía un programa high ticket que funcionaba y anuncios que no le traían a nadie que pudiera pagarlo.</p>
+
+      <div class="case-grid">
+        <div>
+          <figure class="vid">
+            <div class="vid-frame">
+              <iframe src="https://player.vimeo.com/video/1241339854?badge=0&amp;autopause=0&amp;playsinline=1&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" title="El caso de Ailén"></iframe>
+              <button type="button" class="vid-sound" hidden>Tocá para escuchar</button>
+            </div>
+            <div class="vid-cta" hidden>
+              <a class="btn" href="#ficha" data-cta="ficha">Agendar mi diagnóstico</a>
+              <a class="btn btn-wa" href="#" target="_blank" rel="noopener" data-cta="wa">Escribirme por WhatsApp</a>
+            </div>
+          </figure>
+        </div>
+
+        <ol class="timeline">
+          <li>
+            <h3>Antes</h3>
+            <p>Botón promocionar y campañas de mensajes con anuncios genéricos. Le hablaba a profesionales en general. Facturaba entre USD 1.000 y 1.500, sin constancia.</p>
+          </li>
+          <li>
+            <h3>Qué cambiamos</h3>
+            <p>Primero el mensaje: le empezamos a hablar a managers, gerentes y líderes de equipo, que tienen con qué pagar y a los que el inglés les frena la carrera. Después la estructura: todo al administrador de anuncios, con el objetivo y el evento de conversión puestos en agendas.</p>
+          </li>
+          <li>
+            <h3>Hoy</h3>
+            <p class="result">Más de USD 30.000 facturados</p>
+            <p class="result-sub">USD 12.000 solo en enero y febrero, con 30 a 40 llamadas calificadas y 15 cierres. Hoy recibe 3 a 4 llamadas de venta por semana.</p>
+          </li>
+        </ol>
+      </div>
+
+      <div class="case-more">
+        <figure class="vid">
+            <figcaption class="vid-title">Cómo mejorar la calidad de tus leads desde Meta</figcaption>
+            <div class="vid-frame">
+              <iframe src="https://player.vimeo.com/video/1241339855?badge=0&amp;autopause=0&amp;playsinline=1&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" title="Cómo mejorar la calidad de tus leads desde Meta"></iframe>
+              <button type="button" class="vid-sound" hidden>Tocá para escuchar</button>
+            </div>
+            <div class="vid-cta" hidden>
+              <a class="btn" href="#ficha" data-cta="ficha">Agendar mi diagnóstico</a>
+              <a class="btn btn-wa" href="#" target="_blank" rel="noopener" data-cta="wa">Escribirme por WhatsApp</a>
+            </div>
+          </figure>
+        <figure class="vid">
+            <figcaption class="vid-title">No siempre la más barata es la mejor campaña</figcaption>
+            <div class="vid-frame">
+              <iframe src="https://player.vimeo.com/video/1241339853?badge=0&amp;autopause=0&amp;playsinline=1&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" title="No siempre la más barata es la mejor campaña"></iframe>
+              <button type="button" class="vid-sound" hidden>Tocá para escuchar</button>
+            </div>
+            <div class="vid-cta" hidden>
+              <a class="btn" href="#ficha" data-cta="ficha">Agendar mi diagnóstico</a>
+              <a class="btn btn-wa" href="#" target="_blank" rel="noopener" data-cta="wa">Escribirme por WhatsApp</a>
+            </div>
+          </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FIT ================= -->
+  <section class="block" id="fit">
+    <div class="wrap">
+      <h2>Este diagnóstico no es para todo el mundo.</h2>
+      <p class="sub">Trabajo con profesionales que ya tienen un programa que funciona. Si todavía no estás ahí, la llamada no te va a servir y prefiero decírtelo antes.</p>
+      <div class="fit-grid">
+        <div class="fit yes">
+          <h3>Es para vos si</h3>
+          <ul>
+            <li>Sos profesional y ya vendiste tu programa high ticket.</li>
+            <li>Tenés testimonios o casos que demuestran que funciona.</li>
+            <li>Tus clientes llegan por recomendación u orgánico, y no sabés cuántos van a entrar el mes que viene.</li>
+            <li>Probaste anuncios o el botón promocionar y no te trajeron a quien buscabas.</li>
+          </ul>
+        </div>
+        <div class="fit no">
+          <h3>No es para vos si</h3>
+          <ul>
+            <li>Vendés sesiones sueltas y todavía no tenés un programa armado.</li>
+            <li>Nunca vendiste tu servicio.</li>
+            <li>Esperás que los anuncios solos resuelvan un problema de oferta o de ventas.</li>
+            <li>No vas a tener tiempo de implementar en los próximos meses.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="block" id="preguntas">
+    <div class="wrap">
+      <h2>Preguntas antes de reservar</h2>
+      <div class="faq">
+        <details>
+          <summary>¿El diagnóstico tiene costo?</summary>
+          <p>No. Es gratuito y te llevás qué corregir en tu mensaje, tu estructura y tu filtrado, trabajemos juntos o no.</p>
+        </details>
+        <details>
+          <summary>¿Es una llamada de venta?</summary>
+          <p>Es un diagnóstico real de tu sistema. Si al final vemos que puedo ayudarte, te cuento cómo trabajo. Si no hay fit, te lo digo y te vas con el diagnóstico igual.</p>
+        </details>
+        <details>
+          <summary>Ya probé anuncios y no me funcionaron. ¿Por qué ahora sería distinto?</summary>
+          <p>Un programa high ticket no se vende con la misma estructura de campaña que un producto de 30 dólares. Si elegiste el objetivo equivocado o activaste tráfico antes de tener resuelto el mensaje y el filtrado, no probaste publicidad paga: probaste publicidad paga mal configurada. En el diagnóstico vemos exactamente qué falló.</p>
+        </details>
+        <details>
+          <summary>Uso el botón promocionar. ¿No alcanza con eso?</summary>
+          <p>El botón promocionar te da alcance barato porque Meta no sabe a quién mostrarle tu publicación. Para un programa de más de USD 1.000, llegar a más gente sin filtro no te acerca a tu cliente: te llena de consultas de gente que no puede pagarlo.</p>
+        </details>
+        <details>
+          <summary>Mis clientes llegan por recomendación. ¿Para qué necesito un sistema?</summary>
+          <p>Tu experiencia es la razón por la que tus clientes se quedan, no la razón por la que llegan. Las recomendaciones dependen de que otros decidan recomendarte. Eso funciona, pero no te deja saber cuántos clientes van a entrar el mes que viene.</p>
+        </details>
+        <details>
+          <summary>¿Necesito mucho presupuesto para anuncios?</summary>
+          <p>El presupuesto se define según tu programa y tu ticket, y lo vemos en el diagnóstico. Lo importante es esto: más presupuesto sobre un sistema mal armado solo trae más leads que no compran.</p>
+        </details>
+        <details>
+          <summary>¿Trabajás con cualquier rubro?</summary>
+          <p>Trabajo con profesionales que ya venden un programa high ticket: salud, idiomas, formación profesional y rubros similares. Lo que importa no es el rubro, es que el programa ya funcione.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA FINAL ================= -->
+  <section class="block final">
+    <div class="wrap">
+      <h2>Primero el sistema. Después la pauta.</h2>
+      <a class="btn" href="#ficha">Completar la ficha de diagnóstico</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© Lautaro Arrieta. Sistema de Adquisición Predecible™</span>
+    <a href="https://www.instagram.com/lautaroarrietaok/" target="_blank" rel="noopener">@lautaroarrietaok</a>
+  </div>
+</footer>
+
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script>
+(function(){
+  var C = window.CONFIG;
+  var form = document.getElementById('form');
+  var pages = form.querySelectorAll('.page');
+  var stepBars = [document.getElementById('s1'),document.getElementById('s2'),document.getElementById('s3')];
+  var lead = {};
+
+  /* ---------- Botones bajo los videos ---------- */
+  var waHref = 'https://wa.me/' + C.WHATSAPP_NUMERO + '?text=' + encodeURIComponent(C.WHATSAPP_MENSAJE);
+  document.querySelectorAll('[data-cta="wa"]').forEach(function(a){
+    a.href = waHref;
+    a.addEventListener('click', function(){ fbq('track', 'Contact'); });
+  });
+  document.querySelectorAll('[data-cta="ficha"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var ficha = document.getElementById('ficha');
+      ficha.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'});
+      var first = ficha.querySelector('input, iframe');
+      if(first) setTimeout(function(){ first.focus({preventScroll:true}); }, 600);
+    });
+  });
+
+  /* ---------- Videos Vimeo: autoplay en pantalla + botones a 30 s del final ---------- */
+  (function initVideos(){
+    if(!window.Vimeo){ return setTimeout(initVideos, 200); }
+    var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var list = [];
+
+    function showCta(st){
+      if(st.ctaShown) return;
+      st.ctaShown = true;
+      st.cta.hidden = false;
+      st.cta.classList.add('show');
+    }
+    function anotherPlaying(st){
+      return list.some(function(o){ return o !== st && o.playing; });
+    }
+    function autoplay(st){
+      if(reduced || st.userPaused || st.ended || st.playing || !st.inView || anotherPlaying(st)) return;
+      st.p.play().catch(function(){
+        // El navegador bloquea el sonido sin interacción: arranca en silencio y ofrece activar el audio
+        return st.p.setMuted(true).then(function(){
+          st.sound.hidden = false;
+          return st.p.play();
+        });
+      }).catch(function(){});
+    }
+    function nextVisible(){
+      var n = list.find(function(o){ return o.inView && !o.ended && !o.userPaused; });
+      if(n) autoplay(n);
+    }
+
+    document.querySelectorAll('.vid').forEach(function(fig){
+      var iframe = fig.querySelector('iframe');
+      var st = {
+        fig: fig, p: new Vimeo.Player(iframe),
+        cta: fig.querySelector('.vid-cta'), sound: fig.querySelector('.vid-sound'),
+        playing:false, byUs:false, userPaused:false, ended:false, inView:false, ctaShown:false
+      };
+      list.push(st);
+
+      Promise.all([st.p.getVideoWidth(), st.p.getVideoHeight()]).then(function(d){
+        if(d[0] && d[1]){
+          fig.querySelector('.vid-frame').style.aspectRatio = d[0] + ' / ' + d[1];
+          if(d[0] > d[1]) fig.classList.add('wide');
+        }
+      }).catch(function(){});
+
+      st.p.on('play', function(){
+        st.playing = true;
+        list.forEach(function(o){ if(o !== st && o.playing){ o.byUs = true; o.p.pause(); } });
+      });
+      st.p.on('pause', function(){
+        st.playing = false;
+        if(st.byUs){ st.byUs = false; } else if(!st.ended){ st.userPaused = true; }
+      });
+      st.p.on('ended', function(){
+        st.ended = true; st.playing = false; showCta(st); nextVisible();
+      });
+      st.p.on('timeupdate', function(d){
+        if(d.duration && d.duration - d.seconds <= 30) showCta(st);
+      });
+      st.p.on('volumechange', function(){
+        st.p.getMuted().then(function(m){ if(!m) st.sound.hidden = true; }).catch(function(){});
+      });
+      st.sound.addEventListener('click', function(){
+        st.p.setMuted(false).then(function(){ return st.p.setVolume(1); }).catch(function(){});
+        st.sound.hidden = true;
+        if(!st.playing) st.p.play().catch(function(){});
+      });
+    });
+
+    if(!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        var st = list.find(function(o){ return o.fig.querySelector('.vid-frame') === e.target; });
+        if(!st) return;
+        st.inView = e.intersectionRatio >= 0.5;
+        if(st.inView){ autoplay(st); }
+        else if(e.intersectionRatio < 0.2 && st.playing){ st.byUs = true; st.p.pause(); nextVisible(); }
+      });
+    }, {threshold:[0, 0.2, 0.5]});
+    list.forEach(function(st){ io.observe(st.fig.querySelector('.vid-frame')); });
+  })();
+
+  /* ---------- UTMs ---------- */
+  var params = new URLSearchParams(location.search);
+  var utm = {};
+  ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){
+    if(params.get(k)) utm[k] = params.get(k);
+  });
+  try{ if(Object.keys(utm).length) sessionStorage.setItem('utm', JSON.stringify(utm)); else utm = JSON.parse(sessionStorage.getItem('utm')||'{}'); }catch(e){}
+
+  /* ---------- Validación ---------- */
+  var required = {
+    1:['profesion','programa','precio'],
+    2:['facturacion','origen','ads'],
+    3:['inversion','nombre','email','whatsapp','instagram']
+  };
+  function val(name){
+    var el = form.elements[name];
+    if(!el) return '';
+    if(el instanceof RadioNodeList) return el.value;
+    return (el.value||'').trim();
+  }
+  function validate(page){
+    var ok = true, first = null;
+    required[page].forEach(function(name){
+      var v = val(name);
+      var valid = !!v;
+      if(name === 'email') valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+      if(name === 'whatsapp') valid = v.replace(/\D/g,'').length >= 8;
+      var q = form.querySelector('[data-name="'+name+'"]');
+      q.classList.toggle('invalid', !valid);
+      if(!valid){ ok = false; if(!first) first = q; }
+    });
+    if(first){ var f = first.querySelector('input'); if(f) f.focus(); }
+    return ok;
+  }
+  form.addEventListener('change', function(e){
+    var q = e.target.closest('.q'); if(q) q.classList.remove('invalid');
+  });
+  form.addEventListener('input', function(e){
+    var q = e.target.closest('.q'); if(q) q.classList.remove('invalid');
+  });
+
+  /* ---------- Navegación entre páginas ---------- */
+  function show(n){
+    pages.forEach(function(p){ p.hidden = p.dataset.page !== String(n); });
+    stepBars.forEach(function(b,i){ b.classList.toggle('on', i < n); });
+    var ficha = document.getElementById('ficha');
+    if(ficha.getBoundingClientRect().top < 0) ficha.scrollIntoView({block:'start'});
+  }
+  form.addEventListener('click', function(e){
+    var next = e.target.getAttribute('data-next');
+    var prev = e.target.getAttribute('data-prev');
+    if(next){ var cur = Number(next) - 1; if(validate(cur)) show(Number(next)); }
+    if(prev){ show(Number(prev)); }
+  });
+
+  /* ---------- Calificación ---------- */
+  function califica(d){
+    if(d.programa !== 'si_vendido') return false;   // necesita programa ya vendido
+    if(d.precio === 'menos_500') return false;      // ticket mínimo
+    if(d.inversion === 'no') return false;          // sin intención de invertir
+    return true;
+  }
+
+  /* ---------- Envío a Google Sheets (Apps Script) ---------- */
+  function sendToSheets(d){
+    if(!C.SHEETS_ENDPOINT) return Promise.resolve();
+    var body = new URLSearchParams();
+    Object.keys(d).forEach(function(k){ body.append(k, d[k] == null ? '' : d[k]); });
+    // urlencoded para que Apps Script lo lea en e.parameter; keepalive para que no se corte al redirigir
+    return fetch(C.SHEETS_ENDPOINT, {method:'POST', mode:'no-cors', keepalive:true, body:body}).catch(function(){});
+  }
+
+  /* ---------- Submit ---------- */
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!validate(3)) return;
+    var btn = document.getElementById('submit');
+    btn.disabled = true;
+
+    ['profesion','programa','precio','facturacion','origen','ads','inversion','nombre','email','whatsapp','instagram']
+      .forEach(function(k){ lead[k] = val(k); });
+    Object.keys(utm).forEach(function(k){ lead[k] = utm[k]; });
+    lead.califica = califica(lead) ? 'si' : 'no';
+    lead.fecha = new Date().toISOString();
+    lead.estado = 'formulario';
+
+    try{ sessionStorage.setItem('lead', JSON.stringify({nombre:lead.nombre, whatsapp:lead.whatsapp})); }catch(err){}
+
+    sendToSheets(lead).then(function(){
+      if(lead.califica === 'si'){
+        fbq('track', 'Lead');               // Lead = completó la ficha y califica
+        openCalendly();
+      } else {
+        fbq('trackCustom', 'NoCalifica');   // útil para excluir audiencias
+        setTimeout(function(){ location.href = C.NO_CALIFICA_URL; }, 300);
+      }
+    });
+  });
+
+  /* ---------- Calendly embebido ---------- */
+  function openCalendly(){
+    form.hidden = true;
+    document.getElementById('ficha-sub').textContent = 'Último paso: elegí día y horario.';
+    stepBars.forEach(function(b){ b.classList.add('on'); });
+    document.getElementById('cal-step').hidden = false;
+    document.getElementById('ficha').scrollIntoView({block:'start'});
+
+    var tryInit = function(){
+      if(!window.Calendly){ return setTimeout(tryInit, 150); }
+      Calendly.initInlineWidget({
+        url: C.CALENDLY_URL + (C.CALENDLY_URL.indexOf('?') > -1 ? '&' : '?') + 'hide_gdpr_banner=1',
+        parentElement: document.getElementById('calendly'),
+        prefill: { name: lead.nombre, email: lead.email },
+        utm: {
+          utmSource: utm.utm_source, utmMedium: utm.utm_medium, utmCampaign: utm.utm_campaign,
+          utmContent: utm.utm_content, utmTerm: utm.utm_term
+        }
+      });
+    };
+    tryInit();
+  }
+
+  /* ---------- Schedule = reserva confirmada en Calendly ---------- */
+  var scheduled = false;
+  window.addEventListener('message', function(e){
+    if(!e.data || typeof e.data !== 'object' || !e.data.event) return;
+    if(e.data.event.indexOf('calendly.') !== 0) return;
+    if(e.data.event === 'calendly.event_scheduled' && !scheduled){
+      scheduled = true;
+      fbq('track', 'Schedule');             // Schedule = horario confirmado
+      sendToSheets({email: lead.email, estado: 'agendado', fecha: new Date().toISOString()});
+      setTimeout(function(){ location.href = C.GRACIAS_URL; }, 900);
+    }
+  });
+})();
+</script>
+</body>
+</html>

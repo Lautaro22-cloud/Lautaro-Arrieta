@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Falta un paso para confirmar tu diagnóstico | Lautaro Arrieta</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script>
+window.CONFIG = {
+  PIXEL_ID: "",                 // mismo ID que en index.html
+  WHATSAPP_NUMERO: "5491122449985", // tu WhatsApp sin + ni espacios (confirmalo)
+  VIDEO_PREPARACION_ID: ""      // ID de YouTube del video de preparación
+};
+</script>
+<!-- Meta Pixel: solo PageView. El Schedule ya se disparó en la página anterior. -->
+<script>
+(function(){
+  var id = window.CONFIG.PIXEL_ID;
+  if(!id){ window.fbq = function(){}; return; }
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', id);
+  fbq('track', 'PageView');
+})();
+</script>
+
+<style>
+:root{
+  --paper:#F3F5F2;--paper-2:#E7ECE8;--ink:#10201F;--pine:#0F4C47;--pine-deep:#0A3632;
+  --amber:#E8A33A;--amber-deep:#C9861F;--muted:#56676A;--line:#CFD8D4;--white:#FFFFFF;
+  --radius-lg:22px;--radius-sm:10px;
+  --font:"Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px;border-radius:4px}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+.top{padding:22px 0}
+.brand{font-weight:800;font-size:17px;color:var(--ink);text-decoration:none}
+.brand small{display:block;font-weight:500;font-size:13px;color:var(--muted)}
+
+.status{margin-top:28px;display:inline-flex;align-items:center;gap:10px;background:#FBEBD0;color:#6B4510;font-weight:600;font-size:15px;padding:8px 14px;border-radius:999px}
+.status i{width:9px;height:9px;border-radius:50%;background:var(--amber);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+h1{margin-top:18px;font-size:clamp(32px,5vw,54px);line-height:1.04;letter-spacing:-.035em;font-weight:800;max-width:17ch}
+.lead{margin-top:16px;font-size:19px;color:var(--muted);max-width:56ch}
+
+.tasks{list-style:none;margin:44px 0 0;display:grid;gap:18px;counter-reset:t}
+.task{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px;display:grid;grid-template-columns:44px 1fr;gap:18px;align-items:start}
+.task .num{width:44px;height:44px;border-radius:50%;background:var(--pine);color:var(--white);font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center}
+.task h2{font-size:22px;letter-spacing:-.02em;line-height:1.2}
+.task p{margin-top:8px;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;margin-top:18px;font:inherit;font-weight:700;font-size:17px;padding:15px 24px;border:0;border-radius:var(--radius-sm);background:var(--amber);color:var(--ink);text-decoration:none;cursor:pointer}
+.btn:hover{background:var(--amber-deep)}
+.video{margin-top:18px;border-radius:16px;overflow:hidden;background:var(--pine-deep);aspect-ratio:16/9;position:relative}
+.video iframe{width:100%;height:100%;border:0;display:block}
+.video-ph{position:absolute;inset:0;display:flex;align-items:flex-end;padding:18px;color:#DCE7E3;font-size:15px}
+.video-ph .play{position:absolute;top:50%;left:50%;width:60px;height:60px;margin:-30px 0 0 -30px;border-radius:50%;background:var(--amber)}
+.video-ph .play::after{content:"";position:absolute;left:24px;top:18px;border-left:18px solid var(--pine-deep);border-top:12px solid transparent;border-bottom:12px solid transparent}
+
+.prep{margin-top:56px;padding:32px;border-radius:var(--radius-lg);background:var(--pine);color:var(--white)}
+.prep h2{font-size:24px;letter-spacing:-.02em}
+.prep ul{list-style:none;margin-top:16px;display:grid;gap:12px}
+.prep li{padding-left:26px;position:relative;color:#E4EEEA}
+.prep li::before{content:"";position:absolute;left:0;top:7px;width:13px;height:7px;border-left:2.5px solid var(--amber);border-bottom:2.5px solid var(--amber);transform:rotate(-45deg)}
+
+footer{margin-top:72px;padding:32px 0 48px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+@media (max-width:520px){
+  .wrap{padding:0 16px}
+  .task{grid-template-columns:1fr;padding:22px}
+  .btn{width:100%}
+  .prep{padding:24px}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="brand" href="index.html">Lautaro Arrieta<small>Sistema de Adquisición Predecible™</small></a></div></header>
+
+<main class="wrap">
+  <p class="status" role="status"><i aria-hidden="true"></i>Tu diagnóstico todavía no está confirmado</p>
+  <h1 id="titulo">Reservaste tu horario. Falta un paso para confirmarlo.</h1>
+  <p class="lead">Confirmo cada diagnóstico por WhatsApp para asegurarme de que el horario te sirve. Hacé estos dos pasos ahora y queda listo.</p>
+
+  <ol class="tasks">
+    <li class="task">
+      <span class="num" aria-hidden="true">1</span>
+      <div>
+        <h2>Confirmá por WhatsApp</h2>
+        <p>Te voy a escribir para confirmar tu horario. Si querés adelantarte, mandame vos el mensaje ahora con el botón: así ya quedás confirmado.</p>
+        <a class="btn" id="wa" href="#" target="_blank" rel="noopener">Confirmar por WhatsApp</a>
+      </div>
+    </li>
+    <li class="task">
+      <span class="num" aria-hidden="true">2</span>
+      <div>
+        <h2>Mirá este video antes de la llamada</h2>
+        <p>Dos minutos sobre qué vamos a revisar y qué tenés que tener a mano, para que aprovechemos el tiempo.</p>
+        <div class="video" id="video-prep">
+          <div class="video-ph" aria-hidden="true"><span class="play"></span><span>Video de preparación, 2 minutos</span></div>
+        </div>
+      </div>
+    </li>
+  </ol>
+
+  <section class="prep" aria-labelledby="prep-title">
+    <h2 id="prep-title">Para la llamada, tené a mano</h2>
+    <ul>
+      <li>Cuánto cuesta tu programa y cuántos clientes cerraste en los últimos 3 meses.</li>
+      <li>De dónde te llegaron esos clientes.</li>
+      <li>Si hiciste anuncios: acceso para mostrarme qué campañas corriste.</li>
+      <li>Un lugar tranquilo con buena conexión: son 45 minutos por videollamada.</li>
+    </ul>
+  </section>
+</main>
+
+<footer><div class="wrap">© Lautaro Arrieta</div></footer>
+
+<script>
+(function(){
+  var C = window.CONFIG, lead = {};
+  try{ lead = JSON.parse(sessionStorage.getItem('lead')||'{}'); }catch(e){}
+  var nombre = (lead.nombre||'').split(' ')[0];
+  if(nombre){ document.getElementById('titulo').textContent = nombre + ', reservaste tu horario. Falta un paso para confirmarlo.'; }
+  var msg = 'Hola Lautaro! ' + (nombre ? 'Soy ' + nombre + '. ' : '') + 'Acabo de reservar el diagnóstico y quiero confirmar mi horario.';
+  document.getElementById('wa').href = 'https://wa.me/' + C.WHATSAPP_NUMERO + '?text=' + encodeURIComponent(msg);
+  if(C.VIDEO_PREPARACION_ID){
+    document.getElementById('video-prep').innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + C.VIDEO_PREPARACION_ID +
+      '?rel=0&modestbranding=1" title="Video de preparación" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+  }
+})();
+</script>
+</body>
+</html>
