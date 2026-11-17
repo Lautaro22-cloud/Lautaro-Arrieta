@@ -14,11 +14,12 @@
    CONFIGURACIÓN — completá estos valores antes de publicar
    ========================================================= */
 window.CONFIG = {
-  PIXEL_ID: "",            // ID del Meta Pixel. Vacío = no se carga el pixel.
+  PIXEL_ID: "540473718612757",            // ID del Meta Pixel. Vacío = no se carga el pixel.
   CALENDLY_URL: "https://calendly.com/lautaro-trafficker/auditoria-gratuita-consigue-clientes-high-ticket-1",
-  SHEETS_ENDPOINT: "https://script.google.com/macros/s/AKfycby8i2mWuQ67f2Sq6nW4flzPD-CMUqvVa_8H1kKQwDm1amWKdQeN_scOVzRBo-ZO8CQq/exec",     // URL de la Web App de Apps Script que guarda los leads. Vacío = no se envía.
+  SHEETS_ENDPOINT: "https://script.google.com/macros/s/AKfycbx5UdKUfOi0O-go-Q6byD9QH366S99gQxOWRI0blD_hJwLjwbvHMbBVbe76D0b0y7dg/exec",     // URL de la Web App de Apps Script que guarda los leads. Vacío = no se envía.
   WHATSAPP_NUMERO: "5491135574708", // tu WhatsApp sin + ni espacios
   WHATSAPP_MENSAJE: "Hola Lautaro! Vi tu video y quiero hacerte una consulta sobre mi sistema de adquisición.",
+  VIDEO_CASO_SEGUNDOS: 210,  // segundos del video de Ailén que hay que ver para desbloquear la ficha (3:30)
   GRACIAS_URL: "gracias.html",
   NO_CALIFICA_URL: "no-califica.html"
 };
@@ -88,6 +89,7 @@ a{color:var(--pine)}
 .vid-sound[hidden]{display:none}
 .vid-cta{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .vid-cta[hidden]{display:none}
+.vid-cta.one{grid-template-columns:1fr}
 .vid-cta.show{animation:rise .35s ease-out}
 @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .btn.btn-wa{background:transparent;color:var(--pine);border:1.5px solid var(--pine)}
@@ -118,6 +120,19 @@ a{color:var(--pine)}
 .opt input:checked + span{border-color:var(--pine);background:#E2EEEA;font-weight:600}
 .opt input:focus-visible + span{outline:3px solid var(--amber);outline-offset:2px}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tel{display:grid;grid-template-columns:88px minmax(0,1fr);gap:8px}
+/* Ficha bloqueada hasta ver el caso */
+.lock{margin:20px 26px 0;padding:16px 18px;border-radius:var(--radius-sm);background:#FBEBD0;display:grid;gap:12px}
+.lock[hidden]{display:none}
+.lock p{font-size:15px;line-height:1.45;color:#5A3A0C}
+.lock p b{color:var(--ink)}
+.lock-bar{height:6px;border-radius:3px;background:rgba(107,69,16,.16);overflow:hidden}
+.lock-bar span{display:block;height:100%;width:0;background:var(--amber-deep);transition:width .4s linear}
+.lock-left{font-size:13.5px;color:#6B4510;font-variant-numeric:tabular-nums}
+.lock .btn{padding:12px 16px;font-size:15px}
+.ficha.locked .ficha-body{opacity:.38;filter:saturate(.5);pointer-events:none;user-select:none}
+.unlocked-msg{margin:20px 26px 0;padding:12px 16px;border-radius:var(--radius-sm);background:#E2EEEA;color:var(--pine);font-weight:600;font-size:15px}
+.unlocked-msg[hidden]{display:none}
 .err{display:none;color:var(--error);font-size:14px;margin-top:6px}
 .q.invalid .err{display:block}
 .q.invalid input[type=text],.q.invalid input[type=email],.q.invalid input[type=tel]{border-color:var(--error)}
@@ -206,6 +221,7 @@ footer a{color:var(--muted)}
   .vid-cta{grid-template-columns:1fr}
   .hero .vid{margin-top:24px}
   .ficha-head,.ficha-body,.cal-intro{padding-left:18px;padding-right:18px}
+  .lock,.unlocked-msg{margin-left:18px;margin-right:18px}
   .opts.two,.row2{grid-template-columns:1fr}
   section.block{padding:64px 0}
   .final .btn{width:100%}
@@ -230,29 +246,36 @@ footer a{color:var(--muted)}
         <h1>Tu programa funciona. Lo que no funciona es cómo te llegan los clientes.</h1>
         <p class="lead">Diagnóstico gratuito para <strong>profesionales que ya venden un programa high ticket</strong>. En 45 minutos revisamos tu mensaje, tu estructura y tu filtrado, y te llevás qué corregir antes de invertir un peso más en anuncios.</p>
 
-        <figure class="vid">
+        <figure class="vid" data-cta-at="30">
           <figcaption class="vid-title">Mirá esto antes de completar la ficha</figcaption>
           <div class="vid-frame">
-            <iframe src="https://player.vimeo.com/video/1241372272?badge=0&amp;autopause=0&amp;playsinline=1&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Bienvenida al diagnóstico"></iframe>
+            <iframe src="https://player.vimeo.com/video/1241372272?badge=0&amp;title=0&amp;byline=0&amp;portrait=0&amp;vimeo_logo=0&amp;autopause=0&amp;playsinline=1&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Bienvenida al diagnóstico"></iframe>
             <button type="button" class="vid-sound" hidden>Tocá para escuchar</button>
           </div>
-          <div class="vid-cta" hidden>
-            <a class="btn" href="#ficha" data-cta="ficha">Agendar mi diagnóstico</a>
-            <a class="btn btn-wa" href="#" target="_blank" rel="noopener" data-cta="wa">Escribirme por WhatsApp</a>
+          <div class="vid-cta one" hidden>
+            <a class="btn" href="#caso-video" data-cta="caso">Mirá el caso de éxito</a>
           </div>
         </figure>
         <p class="proof-line">Con este sistema, una profesora de inglés para profesionales senior facturó <b>más de USD 30.000</b> desde que trabajamos juntos.</p>
       </div>
 
       <!-- ================= FICHA ================= -->
-      <aside class="ficha" id="ficha" aria-labelledby="ficha-title">
+      <aside class="ficha locked" id="ficha" aria-labelledby="ficha-title">
         <div class="ficha-head">
           <h2 id="ficha-title">Ficha de diagnóstico</h2>
           <p id="ficha-sub">Completala en 2 minutos. Si hay fit, elegís el horario acá mismo.</p>
           <div class="steps" aria-hidden="true"><span class="on" id="s1"></span><span id="s2"></span><span id="s3"></span></div>
         </div>
 
-        <form id="form" class="ficha-body" novalidate>
+        <div class="lock" id="lock" role="status">
+          <p><b>Para completar la ficha, mirá primero el caso de Ailén.</b> Son 3 minutos y medio: ahí ves exactamente qué revisamos en el diagnóstico. La ficha se habilita sola cuando llegás.</p>
+          <div class="lock-bar" aria-hidden="true"><span id="lock-fill"></span></div>
+          <span class="lock-left" id="lock-left">Te faltan 3:30 del video</span>
+          <a class="btn" href="#caso-video" data-cta="caso">Ver el caso de Ailén</a>
+        </div>
+        <p class="unlocked-msg" id="unlocked-msg" hidden>Listo, ya podés completar la ficha.</p>
+
+        <form id="form" class="ficha-body" novalidate inert>
           <!-- Página 1: tu programa -->
           <div class="page" data-page="1">
             <div class="q" data-name="profesion">
@@ -345,15 +368,16 @@ footer a{color:var(--muted)}
               <input id="email" name="email" type="email" placeholder="Email" autocomplete="email" aria-label="Email">
               <p class="err">Ingresá un email válido.</p>
             </div>
-            <div class="row2">
-              <div class="q" data-name="whatsapp">
-                <input id="whatsapp" name="whatsapp" type="tel" placeholder="WhatsApp con código de país" autocomplete="tel" aria-label="WhatsApp">
-                <p class="err">Ingresá tu WhatsApp.</p>
+            <div class="q" data-name="whatsapp">
+              <div class="tel">
+                <input id="wa_codigo" name="wa_codigo" type="tel" inputmode="tel" value="+54" autocomplete="tel-country-code" aria-label="Código de país">
+                <input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" placeholder="WhatsApp (ej.: 11 2345 6789)" autocomplete="tel-national" aria-label="Número de WhatsApp">
               </div>
-              <div class="q" data-name="instagram">
-                <input id="instagram" name="instagram" type="text" placeholder="@instagram" aria-label="Instagram">
-                <p class="err">Ingresá tu Instagram.</p>
-              </div>
+              <p class="err">Completá el código de país (ej.: +54) y tu número de WhatsApp.</p>
+            </div>
+            <div class="q" data-name="instagram">
+              <input id="instagram" name="instagram" type="text" placeholder="@instagram" aria-label="Instagram">
+              <p class="err">Ingresá tu Instagram.</p>
             </div>
 
             <div class="nav-row">
@@ -384,9 +408,9 @@ footer a{color:var(--muted)}
 
       <div class="case-grid">
         <div>
-          <figure class="vid">
+          <figure class="vid" data-role="caso" id="caso-video">
             <div class="vid-frame">
-              <iframe src="https://player.vimeo.com/video/1241372271?badge=0&amp;autopause=0&amp;playsinline=1&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" title="El caso de Ailén"></iframe>
+              <iframe src="https://player.vimeo.com/video/1241372271?badge=0&amp;title=0&amp;byline=0&amp;portrait=0&amp;vimeo_logo=0&amp;autopause=0&amp;playsinline=1&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" title="El caso de Ailén"></iframe>
               <button type="button" class="vid-sound" hidden>Tocá para escuchar</button>
             </div>
             <div class="vid-cta" hidden>
@@ -417,7 +441,7 @@ footer a{color:var(--muted)}
         <figure class="vid">
             <figcaption class="vid-title">Cómo mejorar la calidad de tus leads desde Meta</figcaption>
             <div class="vid-frame">
-              <iframe src="https://player.vimeo.com/video/1241372274?badge=0&amp;autopause=0&amp;playsinline=1&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" title="Cómo mejorar la calidad de tus leads desde Meta"></iframe>
+              <iframe src="https://player.vimeo.com/video/1241372274?badge=0&amp;title=0&amp;byline=0&amp;portrait=0&amp;vimeo_logo=0&amp;autopause=0&amp;playsinline=1&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" title="Cómo mejorar la calidad de tus leads desde Meta"></iframe>
               <button type="button" class="vid-sound" hidden>Tocá para escuchar</button>
             </div>
             <div class="vid-cta" hidden>
@@ -428,7 +452,7 @@ footer a{color:var(--muted)}
         <figure class="vid">
             <figcaption class="vid-title">No siempre la más barata es la mejor campaña</figcaption>
             <div class="vid-frame" style="aspect-ratio:16/9">
-              <iframe src="https://player.vimeo.com/video/1241372270?badge=0&amp;autopause=0&amp;playsinline=1&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" title="No siempre la más barata es la mejor campaña"></iframe>
+              <iframe src="https://player.vimeo.com/video/1241372270?badge=0&amp;title=0&amp;byline=0&amp;portrait=0&amp;vimeo_logo=0&amp;autopause=0&amp;playsinline=1&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" title="No siempre la más barata es la mejor campaña"></iframe>
               <button type="button" class="vid-sound" hidden>Tocá para escuchar</button>
             </div>
             <div class="vid-cta" hidden>
@@ -547,6 +571,46 @@ footer a{color:var(--muted)}
     });
   });
 
+  /* ---------- Ficha bloqueada hasta ver el caso de Ailén ---------- */
+  var ficha = document.getElementById('ficha');
+  var LOCK_KEY = 'ficha_desbloqueada';
+  var isLocked = true;
+  function fmt(sec){ sec = Math.max(0, Math.ceil(sec)); return Math.floor(sec/60) + ':' + ('0' + (sec%60)).slice(-2); }
+  function lockProgress(watched, needed){
+    document.getElementById('lock-fill').style.width = Math.min(100, watched / needed * 100) + '%';
+    document.getElementById('lock-left').textContent = 'Te faltan ' + fmt(needed - watched) + ' del video';
+  }
+  function unlock(viaVideo){
+    if(!isLocked) return;
+    isLocked = false;
+    ficha.classList.remove('locked');
+    form.inert = false;
+    document.getElementById('lock').hidden = true;
+    if(viaVideo){
+      document.getElementById('unlocked-msg').hidden = false;
+      fbq('trackCustom', 'VideoCasoVisto');   // audiencia: vio 3:30 del caso
+    }
+    try{ localStorage.setItem(LOCK_KEY, '1'); }catch(e){}
+  }
+  try{ if(localStorage.getItem(LOCK_KEY) === '1') unlock(false); }catch(e){}
+  // Si Vimeo no carga, no dejamos la ficha bloqueada para siempre
+  setTimeout(function(){ if(!window.Vimeo) unlock(false); }, 12000);
+
+  var casoPlayer = null;
+  document.querySelectorAll('[data-cta="caso"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var target = document.getElementById('caso-video');
+      target.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'center'});
+      if(casoPlayer){
+        // el clic habilita el sonido: arranca el caso con audio
+        casoPlayer.st.userPaused = false;
+        casoPlayer.p.setMuted(false).then(function(){ return casoPlayer.p.setVolume(1); })
+          .then(function(){ casoPlayer.st.sound.hidden = true; return casoPlayer.p.play(); }).catch(function(){});
+      }
+    });
+  });
+
   /* ---------- Videos Vimeo: autoplay en pantalla + botones a 30 s del final ---------- */
   (function initVideos(){
     if(!window.Vimeo){ return setTimeout(initVideos, 200); }
@@ -579,13 +643,33 @@ footer a{color:var(--muted)}
 
     document.querySelectorAll('.vid').forEach(function(fig){
       var iframe = fig.querySelector('iframe');
-      if(!/player\.vimeo\.com\/video\/\d+/.test(iframe.getAttribute('src')||'')){ fig.hidden = true; return; } // sin video cargado todavía: se oculta
+      if(!/player\.vimeo\.com\/video\/\d+/.test(iframe.getAttribute('src')||'')){ // sin video cargado todavía: se oculta
+        fig.hidden = true;
+        if(fig.dataset.role === 'caso') unlock(false);
+        return;
+      }
       var st = {
         fig: fig, p: new Vimeo.Player(iframe),
         cta: fig.querySelector('.vid-cta'), sound: fig.querySelector('.vid-sound'),
         playing:false, byUs:false, userPaused:false, ended:false, inView:false, ctaShown:false
       };
       list.push(st);
+      var ctaAt = Number(fig.dataset.ctaAt || 0);
+
+      if(fig.dataset.role === 'caso'){
+        casoPlayer = {p: st.p, st: st};
+        var watched = 0, last = null, needed = C.VIDEO_CASO_SEGUNDOS;
+        st.p.getDuration().then(function(d){ if(d && d - 5 < needed){ needed = Math.max(30, d - 5); lockProgress(watched, needed); } }).catch(function(){});
+        st.p.on('timeupdate', function(d){
+          // cuenta solo tiempo realmente reproducido (adelantar no suma)
+          if(last !== null){ var delta = d.seconds - last; if(delta > 0 && delta < 2) watched += delta; }
+          last = d.seconds;
+          if(isLocked){ lockProgress(watched, needed); if(watched >= needed) unlock(true); }
+        });
+        st.p.on('seeked', function(d){ last = d.seconds; });
+        st.p.on('ended', function(){ if(isLocked && watched >= needed - 10) unlock(true); });
+        st.p.on('error', function(){ unlock(false); });
+      }
 
       st.p.on('play', function(){
         st.playing = true;
@@ -599,7 +683,8 @@ footer a{color:var(--muted)}
         st.ended = true; st.playing = false; showCta(st); nextVisible();
       });
       st.p.on('timeupdate', function(d){
-        if(d.duration && d.duration - d.seconds <= 30) showCta(st);
+        if(ctaAt){ if(d.seconds >= ctaAt) showCta(st); }
+        else if(d.duration && d.duration - d.seconds <= 30) showCta(st);
       });
       st.p.on('volumechange', function(){
         st.p.getMuted().then(function(m){ if(!m) st.sound.hidden = true; }).catch(function(){});
@@ -631,6 +716,9 @@ footer a{color:var(--muted)}
     if(params.get(k)) utm[k] = params.get(k);
   });
   try{ if(Object.keys(utm).length) sessionStorage.setItem('utm', JSON.stringify(utm)); else utm = JSON.parse(sessionStorage.getItem('utm')||'{}'); }catch(e){}
+  var fbclid = params.get('fbclid') || '';
+  try{ if(fbclid) sessionStorage.setItem('fbclid', fbclid); else fbclid = sessionStorage.getItem('fbclid') || ''; }catch(e){}
+  function getCookie(n){ var m = document.cookie.match('(?:^|; )' + n + '=([^;]*)'); return m ? decodeURIComponent(m[1]) : ''; }
 
   /* ---------- Validación ---------- */
   var required = {
@@ -650,7 +738,7 @@ footer a{color:var(--muted)}
       var v = val(name);
       var valid = !!v;
       if(name === 'email') valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-      if(name === 'whatsapp') valid = v.replace(/\D/g,'').length >= 8;
+      if(name === 'whatsapp') valid = /^\+?\d{1,4}$/.test(val('wa_codigo').replace(/\s/g,'')) && v.replace(/\D/g,'').length >= 6;
       var q = form.querySelector('[data-name="'+name+'"]');
       q.classList.toggle('invalid', !valid);
       if(!valid){ ok = false; if(!first) first = q; }
@@ -705,10 +793,16 @@ footer a{color:var(--muted)}
 
     ['profesion','programa','precio','facturacion','origen','ads','inversion','nombre','email','whatsapp','instagram']
       .forEach(function(k){ lead[k] = val(k); });
+    lead.whatsapp = '+' + val('wa_codigo').replace(/\D/g,'') + ' ' + lead.whatsapp;
     Object.keys(utm).forEach(function(k){ lead[k] = utm[k]; });
     lead.califica = califica(lead) ? 'si' : 'no';
     lead.fecha = new Date().toISOString();
     lead.estado = 'formulario';
+    // Datos para que Meta reconozca a la persona cuando se registre la venta (Conversions API)
+    lead.fbp = getCookie('_fbp');
+    lead.fbc = getCookie('_fbc') || (fbclid ? 'fb.1.' + Date.now() + '.' + fbclid : '');
+    lead.user_agent = navigator.userAgent;
+    lead.url = location.origin + location.pathname;
 
     try{ sessionStorage.setItem('lead', JSON.stringify({nombre:lead.nombre, whatsapp:lead.whatsapp})); }catch(err){}
 
