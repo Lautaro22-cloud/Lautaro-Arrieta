@@ -12,7 +12,7 @@
 <script>
 window.CONFIG = {
   PIXEL_ID: "",            // mismo ID que en index.html
-  RECURSO_URL: "#",        // link a la guía de objetivo de campaña (o el recurso que elijas)
+  RECURSO_URL: "https://drive.google.com/drive/folders/1Yp7U-cFY7ORjkMn-eWTyAJOMuCICtZtg?usp=drive_link",  // carpeta de recursos gratis
   INSTAGRAM_URL: "https://www.instagram.com/lautaroarrietaok/"
 };
 </script>
@@ -51,6 +51,9 @@ h1{margin-top:40px;font-size:clamp(30px,4.6vw,48px);line-height:1.06;letter-spac
 .card p{margin-top:8px;color:var(--muted)}
 .btn{display:inline-flex;align-items:center;justify-content:center;margin-top:20px;font:inherit;font-weight:700;font-size:17px;padding:15px 24px;border-radius:var(--radius-sm);background:var(--amber);color:var(--ink);text-decoration:none}
 .btn:hover{background:var(--amber-deep)}
+.rec{list-style:none;margin-top:14px;display:grid;gap:10px}
+.rec li{padding-left:24px;position:relative}
+.rec li::before{content:"";position:absolute;left:2px;top:6px;width:10px;height:12px;border:2px solid var(--pine);border-radius:2px}
 .alt{margin-top:28px;color:var(--muted)}
 .alt a{color:var(--pine);font-weight:600}
 footer{margin-top:72px;padding:32px 0 48px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
@@ -65,9 +68,15 @@ footer{margin-top:72px;padding:32px 0 48px;border-top:1px solid var(--line);font
   <p class="lead">El diagnóstico está pensado para profesionales que ya venden un programa high ticket. Por lo que contaste, todavía estás en una etapa anterior, y una llamada conmigo no te va a dar lo que necesitás hoy. Prefiero decírtelo ahora antes que hacerte perder 45 minutos.</p>
 
   <div class="card">
-    <h2>Empezá por acá: cómo elegir el objetivo de campaña correcto</h2>
-    <p>Es el error más caro que veo en profesionales que empiezan con anuncios: elegir mensajes o alcance cuando lo que necesitan son agendas. Esta guía te explica cuál usar y por qué, para que cuando actives tu pauta no tires la plata.</p>
-    <a class="btn" id="recurso" href="#" target="_blank" rel="noopener">Ver la guía gratis</a>
+    <h2>Empezá por acá: recursos gratis para armar tu sistema</h2>
+    <p>Una carpeta con los materiales que uso con mis clientes, para que cuando actives tu pauta no tires la plata:</p>
+    <ul class="rec">
+      <li>Guía para armar tu campaña de clientes potenciales</li>
+      <li>Las 5 preguntas para que tu formulario deje afuera a los que no pueden pagar</li>
+      <li>Prompts para escribir tu mensaje de marketing y tus anuncios con Claude</li>
+      <li>Guía de Claude y Meta Andromeda</li>
+    </ul>
+    <a class="btn" id="recurso" href="#" target="_blank" rel="noopener">Ver los recursos gratis</a>
   </div>
 
   <p class="alt">Y si querés seguir aprendiendo cómo se arma un sistema de adquisición, en mi Instagram lo explico todas las semanas: <a id="ig" href="#" target="_blank" rel="noopener">@lautaroarrietaok</a>. Cuando tengas tu programa vendiendo, volvé a completar la ficha.</p>
