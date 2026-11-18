@@ -1,6 +1,14 @@
 <!doctype html>
 <html lang="es">
 <head>
+<!-- Google Tag Manager -->
+<script>window.dataLayer = window.dataLayer || [];</script>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5NZ79Q9Q');</script>
+<!-- End Google Tag Manager -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Diagnóstico de tu Sistema de Adquisición | Lautaro Arrieta</title>
@@ -228,8 +236,20 @@ footer a{color:var(--muted)}
   #calendly{height:1000px}
 }
 </style>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "zfd5a1oox4");
+</script>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5NZ79Q9Q"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <header class="top">
   <div class="wrap">
@@ -550,6 +570,7 @@ footer a{color:var(--muted)}
 <script>
 (function(){
   var C = window.CONFIG;
+  function dl(ev, p){ window.dataLayer = window.dataLayer || []; var o = {event: ev}; for(var k in (p||{})) o[k] = p[k]; window.dataLayer.push(o); }
   var form = document.getElementById('form');
   var pages = form.querySelectorAll('.page');
   var stepBars = [document.getElementById('s1'),document.getElementById('s2'),document.getElementById('s3')];
@@ -559,7 +580,7 @@ footer a{color:var(--muted)}
   var waHref = 'https://wa.me/' + C.WHATSAPP_NUMERO + '?text=' + encodeURIComponent(C.WHATSAPP_MENSAJE);
   document.querySelectorAll('[data-cta="wa"]').forEach(function(a){
     a.href = waHref;
-    a.addEventListener('click', function(){ fbq('track', 'Contact'); });
+    a.addEventListener('click', function(){ fbq('track', 'Contact'); dl('contacto_whatsapp', {origen: 'video'}); });
   });
   document.querySelectorAll('[data-cta="ficha"]').forEach(function(a){
     a.addEventListener('click', function(e){
@@ -587,6 +608,7 @@ footer a{color:var(--muted)}
     form.inert = false;
     document.getElementById('lock').hidden = true;
     if(viaVideo){
+      dl('ficha_desbloqueada');
       document.getElementById('unlocked-msg').hidden = false;
       fbq('trackCustom', 'VideoCasoVisto');   // audiencia: vio 3:30 del caso
     }
@@ -600,6 +622,7 @@ footer a{color:var(--muted)}
   document.querySelectorAll('[data-cta="caso"]').forEach(function(a){
     a.addEventListener('click', function(e){
       e.preventDefault();
+      dl('click_ver_caso', {origen: a.closest('.lock') ? 'ficha' : 'bienvenida'});
       var target = document.getElementById('caso-video');
       target.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'center'});
       if(casoPlayer){
@@ -622,6 +645,7 @@ footer a{color:var(--muted)}
       st.ctaShown = true;
       st.cta.hidden = false;
       st.cta.classList.add('show');
+      if(st.fig.dataset.ctaAt) dl('video_bienvenida_30s');
     }
     function anotherPlaying(st){
       return list.some(function(o){ return o !== st && o.playing; });
@@ -658,12 +682,13 @@ footer a{color:var(--muted)}
 
       if(fig.dataset.role === 'caso'){
         casoPlayer = {p: st.p, st: st};
-        var watched = 0, last = null, needed = C.VIDEO_CASO_SEGUNDOS;
+        var watched = 0, last = null, needed = C.VIDEO_CASO_SEGUNDOS, hitos = {};
         st.p.getDuration().then(function(d){ if(d && d - 5 < needed){ needed = Math.max(30, d - 5); lockProgress(watched, needed); } }).catch(function(){});
         st.p.on('timeupdate', function(d){
           // cuenta solo tiempo realmente reproducido (adelantar no suma)
           if(last !== null){ var delta = d.seconds - last; if(delta > 0 && delta < 2) watched += delta; }
           last = d.seconds;
+          if(d.duration){ [25, 50, 75, 100].forEach(function(h){ if(!hitos[h] && d.seconds / d.duration * 100 >= (h === 100 ? 97 : h)){ hitos[h] = true; dl('video_caso_progreso', {porcentaje: h}); } }); }
           if(isLocked){ lockProgress(watched, needed); if(watched >= needed) unlock(true); }
         });
         st.p.on('seeked', function(d){ last = d.seconds; });
@@ -763,7 +788,7 @@ footer a{color:var(--muted)}
   form.addEventListener('click', function(e){
     var next = e.target.getAttribute('data-next');
     var prev = e.target.getAttribute('data-prev');
-    if(next){ var cur = Number(next) - 1; if(validate(cur)) show(Number(next)); }
+    if(next){ var cur = Number(next) - 1; if(validate(cur)){ dl('ficha_paso', {paso: cur}); show(Number(next)); } }
     if(prev){ show(Number(prev)); }
   });
 
@@ -796,6 +821,8 @@ footer a{color:var(--muted)}
     lead.whatsapp = '+' + val('wa_codigo').replace(/\D/g,'') + ' ' + lead.whatsapp;
     Object.keys(utm).forEach(function(k){ lead[k] = utm[k]; });
     lead.califica = califica(lead) ? 'si' : 'no';
+    dl('ficha_paso', {paso: 3});
+    dl('generate_lead', {califica: lead.califica, programa: lead.programa, precio: lead.precio, fuente: utm.utm_source || 'directo'});
     lead.fecha = new Date().toISOString();
     lead.estado = 'formulario';
     // Datos para que Meta reconozca a la persona cuando se registre la venta (Conversions API)
@@ -845,9 +872,12 @@ footer a{color:var(--muted)}
   window.addEventListener('message', function(e){
     if(!e.data || typeof e.data !== 'object' || !e.data.event) return;
     if(e.data.event.indexOf('calendly.') !== 0) return;
+    if(e.data.event === 'calendly.event_type_viewed') dl('calendly_visto');
+    if(e.data.event === 'calendly.date_and_time_selected') dl('calendly_horario_elegido');
     if(e.data.event === 'calendly.event_scheduled' && !scheduled){
       scheduled = true;
       fbq('track', 'Schedule');             // Schedule = horario confirmado
+      dl('agenda_confirmada');
       sendToSheets({email: lead.email, estado: 'agendado', fecha: new Date().toISOString()});
       setTimeout(function(){ location.href = C.GRACIAS_URL; }, 900);
     }
