@@ -1,6 +1,14 @@
 <!doctype html>
 <html lang="es">
 <head>
+<!-- Google Tag Manager -->
+<script>window.dataLayer = window.dataLayer || [];</script>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5NZ79Q9Q');</script>
+<!-- End Google Tag Manager -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Falta un paso para confirmar tu diagnóstico | Lautaro Arrieta</title>
@@ -89,6 +97,10 @@ footer{margin-top:72px;padding:32px 0 48px;border-top:1px solid var(--line);font
 </script>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5NZ79Q9Q"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 <header class="top"><div class="wrap"><a class="brand" href="index.html">Lautaro Arrieta<small>Sistema de Adquisición Predecible™</small></a></div></header>
 
 <main class="wrap">
@@ -123,6 +135,7 @@ footer{margin-top:72px;padding:32px 0 48px;border-top:1px solid var(--line);font
 <script>
 (function(){
   var C = window.CONFIG, lead = {};
+  function dl(ev, p){ window.dataLayer = window.dataLayer || []; var o = {event: ev}; for(var k in (p||{})) o[k] = p[k]; window.dataLayer.push(o); }
   try{ lead = JSON.parse(sessionStorage.getItem('lead')||'{}'); }catch(e){}
   var nombre = (lead.nombre||'').split(' ')[0];
   if(nombre){ document.getElementById('titulo').textContent = nombre + ', reservaste tu horario. Falta un paso para confirmarlo.'; }
@@ -130,7 +143,7 @@ footer{margin-top:72px;padding:32px 0 48px;border-top:1px solid var(--line);font
   var wa = document.getElementById('wa');
   wa.href = 'https://wa.me/' + C.WHATSAPP_NUMERO + '?text=' + encodeURIComponent(msg);
   // Evento propio, separado del "Contact" de la landing: mide quién confirma la llamada
-  wa.addEventListener('click', function(){ fbq('trackCustom', 'ConfirmacionWhatsApp'); });
+  wa.addEventListener('click', function(){ fbq('trackCustom', 'ConfirmacionWhatsApp'); dl('confirmacion_whatsapp'); });
 })();
 </script>
 </body>
