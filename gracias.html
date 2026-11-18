@@ -11,9 +11,8 @@
 
 <script>
 window.CONFIG = {
-  PIXEL_ID: "",                 // mismo ID que en index.html
+  PIXEL_ID: "540473718612757",                 // mismo ID que en index.html
   WHATSAPP_NUMERO: "5491135574708", // tu WhatsApp sin + ni espacios
-  VIDEO_PREPARACION_ID: ""      // ID de YouTube del video de preparación
 };
 </script>
 <!-- Meta Pixel: solo PageView. El Schedule ya se disparó en la página anterior. -->
@@ -54,7 +53,7 @@ h1{margin-top:18px;font-size:clamp(32px,5vw,54px);line-height:1.04;letter-spacin
 .lead{margin-top:16px;font-size:19px;color:var(--muted);max-width:56ch}
 
 .tasks{list-style:none;margin:44px 0 0;display:grid;gap:18px;counter-reset:t}
-.task{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px;display:grid;grid-template-columns:44px 1fr;gap:18px;align-items:start}
+.task{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px;display:grid;grid-template-columns:1fr;gap:18px;align-items:start}
 .task .num{width:44px;height:44px;border-radius:50%;background:var(--pine);color:var(--white);font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center}
 .task h2{font-size:22px;letter-spacing:-.02em;line-height:1.2}
 .task p{margin-top:8px;color:var(--muted)}
@@ -80,6 +79,14 @@ footer{margin-top:72px;padding:32px 0 48px;border-top:1px solid var(--line);font
   .prep{padding:24px}
 }
 </style>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "zfd5a1oox4");
+</script>
 </head>
 <body>
 <header class="top"><div class="wrap"><a class="brand" href="index.html">Lautaro Arrieta<small>Sistema de Adquisición Predecible™</small></a></div></header>
@@ -87,25 +94,14 @@ footer{margin-top:72px;padding:32px 0 48px;border-top:1px solid var(--line);font
 <main class="wrap">
   <p class="status" role="status"><i aria-hidden="true"></i>Tu diagnóstico todavía no está confirmado</p>
   <h1 id="titulo">Reservaste tu horario. Falta un paso para confirmarlo.</h1>
-  <p class="lead">Confirmo cada diagnóstico por WhatsApp para asegurarme de que el horario te sirve. Hacé estos dos pasos ahora y queda listo.</p>
+  <p class="lead">Confirmo cada diagnóstico por WhatsApp para asegurarme de que el horario te sirve. Mandame el mensaje ahora y queda listo.</p>
 
   <ol class="tasks">
     <li class="task">
-      <span class="num" aria-hidden="true">1</span>
       <div>
         <h2>Confirmá por WhatsApp</h2>
         <p>Te voy a escribir para confirmar tu horario. Si querés adelantarte, mandame vos el mensaje ahora con el botón: así ya quedás confirmado.</p>
         <a class="btn" id="wa" href="#" target="_blank" rel="noopener">Confirmar por WhatsApp</a>
-      </div>
-    </li>
-    <li class="task">
-      <span class="num" aria-hidden="true">2</span>
-      <div>
-        <h2>Mirá este video antes de la llamada</h2>
-        <p>Dos minutos sobre qué vamos a revisar y qué tenés que tener a mano, para que aprovechemos el tiempo.</p>
-        <div class="video" id="video-prep">
-          <div class="video-ph" aria-hidden="true"><span class="play"></span><span>Video de preparación, 2 minutos</span></div>
-        </div>
       </div>
     </li>
   </ol>
@@ -131,11 +127,10 @@ footer{margin-top:72px;padding:32px 0 48px;border-top:1px solid var(--line);font
   var nombre = (lead.nombre||'').split(' ')[0];
   if(nombre){ document.getElementById('titulo').textContent = nombre + ', reservaste tu horario. Falta un paso para confirmarlo.'; }
   var msg = 'Hola Lautaro! ' + (nombre ? 'Soy ' + nombre + '. ' : '') + 'Acabo de reservar el diagnóstico y quiero confirmar mi horario.';
-  document.getElementById('wa').href = 'https://wa.me/' + C.WHATSAPP_NUMERO + '?text=' + encodeURIComponent(msg);
-  if(C.VIDEO_PREPARACION_ID){
-    document.getElementById('video-prep').innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + C.VIDEO_PREPARACION_ID +
-      '?rel=0&modestbranding=1" title="Video de preparación" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
-  }
+  var wa = document.getElementById('wa');
+  wa.href = 'https://wa.me/' + C.WHATSAPP_NUMERO + '?text=' + encodeURIComponent(msg);
+  // Evento propio, separado del "Contact" de la landing: mide quién confirma la llamada
+  wa.addEventListener('click', function(){ fbq('trackCustom', 'ConfirmacionWhatsApp'); });
 })();
 </script>
 </body>
