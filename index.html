@@ -27,7 +27,8 @@ window.CONFIG = {
   SHEETS_ENDPOINT: "https://script.google.com/macros/s/AKfycbx5UdKUfOi0O-go-Q6byD9QH366S99gQxOWRI0blD_hJwLjwbvHMbBVbe76D0b0y7dg/exec",     // URL de la Web App de Apps Script que guarda los leads. Vacío = no se envía.
   WHATSAPP_NUMERO: "5491135574708", // tu WhatsApp sin + ni espacios
   WHATSAPP_MENSAJE: "Hola Lautaro! Vi tu video y quiero hacerte una consulta sobre mi sistema de adquisición.",
-  VIDEO_CASO_SEGUNDOS: 210,  // segundos del video de Ailén que hay que ver para desbloquear la ficha (3:30)
+  BLOQUEAR_FICHA: false,     // true = la ficha se habilita recién después de ver VIDEO_CASO_SEGUNDOS del caso de Ailén
+  VIDEO_CASO_SEGUNDOS: 210,  // 3:30. Con o sin bloqueo, al llegar se dispara el evento VideoCasoVisto
   GRACIAS_URL: "gracias.html",
   NO_CALIFICA_URL: "no-califica.html"
 };
@@ -141,6 +142,9 @@ a{color:var(--pine)}
 .ficha.locked .ficha-body{opacity:.38;filter:saturate(.5);pointer-events:none;user-select:none}
 .unlocked-msg{margin:20px 26px 0;padding:12px 16px;border-radius:var(--radius-sm);background:#E2EEEA;color:var(--pine);font-weight:600;font-size:15px}
 .unlocked-msg[hidden]{display:none}
+.ficha-tip{margin:18px 26px 0;font-size:14.5px;color:var(--muted)}
+.ficha-tip[hidden]{display:none}
+.ficha-tip a{font-weight:600}
 .err{display:none;color:var(--error);font-size:14px;margin-top:6px}
 .q.invalid .err{display:block}
 .q.invalid input[type=text],.q.invalid input[type=email],.q.invalid input[type=tel]{border-color:var(--error)}
@@ -167,6 +171,14 @@ section.block{padding:84px 0;border-top:1px solid var(--line)}
 
 /* Case */
 .case{background:var(--pine);color:var(--white);border-top:0}
+.case-kicker{color:var(--amber);font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:36px;max-width:900px}
+.stat{border-radius:18px;padding:22px 24px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14)}
+.stat b{display:block;font-size:clamp(26px,3vw,34px);font-weight:800;letter-spacing:-.03em;line-height:1.1;color:var(--amber);font-variant-numeric:tabular-nums}
+.stat span{display:block;margin-top:6px;font-size:15px;color:#CFE0DB}
+.stat.main{background:var(--amber);border-color:var(--amber)}
+.stat.main b{color:var(--ink)}
+.stat.main span{color:#3A2A0C}
 .case h2{color:var(--white)}
 .case .sub{color:#CFE0DB}
 .case-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:48px;margin-top:44px;align-items:start}
@@ -229,9 +241,10 @@ footer a{color:var(--muted)}
   .vid-cta{grid-template-columns:1fr}
   .hero .vid{margin-top:24px}
   .ficha-head,.ficha-body,.cal-intro{padding-left:18px;padding-right:18px}
-  .lock,.unlocked-msg{margin-left:18px;margin-right:18px}
+  .lock,.unlocked-msg,.ficha-tip{margin-left:18px;margin-right:18px}
   .opts.two,.row2{grid-template-columns:1fr}
   section.block{padding:64px 0}
+  .stats{grid-template-columns:1fr;gap:12px}
   .final .btn{width:100%}
   #calendly{height:1000px}
 }
@@ -280,14 +293,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
 
       <!-- ================= FICHA ================= -->
-      <aside class="ficha locked" id="ficha" aria-labelledby="ficha-title">
+      <aside class="ficha" id="ficha" aria-labelledby="ficha-title">
         <div class="ficha-head">
           <h2 id="ficha-title">Ficha de diagnóstico</h2>
           <p id="ficha-sub">Completala en 2 minutos. Si hay fit, elegís el horario acá mismo.</p>
           <div class="steps" aria-hidden="true"><span class="on" id="s1"></span><span id="s2"></span><span id="s3"></span></div>
         </div>
 
-        <div class="lock" id="lock" role="status">
+        <p class="ficha-tip" id="ficha-tip">¿Querés ver antes cómo trabajo? <a href="#caso-video" data-cta="caso">Mirá el caso de Ailén</a></p>
+        <div class="lock" id="lock" role="status" hidden>
           <p><b>Para completar la ficha, mirá primero el caso de Ailén.</b> Son 3 minutos y medio: ahí ves exactamente qué revisamos en el diagnóstico. La ficha se habilita sola cuando llegás.</p>
           <div class="lock-bar" aria-hidden="true"><span id="lock-fill"></span></div>
           <span class="lock-left" id="lock-left">Te faltan 3:30 del video</span>
@@ -295,7 +309,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <p class="unlocked-msg" id="unlocked-msg" hidden>Listo, ya podés completar la ficha.</p>
 
-        <form id="form" class="ficha-body" novalidate inert>
+        <form id="form" class="ficha-body" novalidate>
           <!-- Página 1: tu programa -->
           <div class="page" data-page="1">
             <div class="q" data-name="profesion">
@@ -423,8 +437,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- ================= CASO ================= -->
   <section class="block case" id="caso">
     <div class="wrap">
+      <p class="case-kicker">Caso de éxito</p>
       <h2>No era un problema de anuncios. Era un problema de orden.</h2>
       <p class="sub">El caso de Ailén, profesora de inglés para profesionales senior. Tenía un programa high ticket que funcionaba y anuncios que no le traían a nadie que pudiera pagarlo.</p>
+
+      <div class="stats" aria-label="Resultados de Ailén">
+        <div class="stat main"><b>+USD 30.000</b><span>facturados desde que trabajamos juntos</span></div>
+        <div class="stat"><b>USD 12.000</b><span>solo en enero y febrero</span></div>
+        <div class="stat"><b>30 a 40</b><span>llamadas calificadas</span></div>
+        <div class="stat"><b>15</b><span>cierres</span></div>
+      </div>
 
       <div class="case-grid">
         <div>
@@ -595,7 +617,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   /* ---------- Ficha bloqueada hasta ver el caso de Ailén ---------- */
   var ficha = document.getElementById('ficha');
   var LOCK_KEY = 'ficha_desbloqueada';
-  var isLocked = true;
+  var isLocked = false, casoVistoOk = false;
+  function lockForm(){
+    isLocked = true;
+    ficha.classList.add('locked');
+    form.inert = true;
+    document.getElementById('lock').hidden = false;
+    document.getElementById('ficha-tip').hidden = true;
+  }
   function fmt(sec){ sec = Math.max(0, Math.ceil(sec)); return Math.floor(sec/60) + ':' + ('0' + (sec%60)).slice(-2); }
   function lockProgress(watched, needed){
     document.getElementById('lock-fill').style.width = Math.min(100, watched / needed * 100) + '%';
@@ -610,11 +639,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if(viaVideo){
       dl('ficha_desbloqueada');
       document.getElementById('unlocked-msg').hidden = false;
-      fbq('trackCustom', 'VideoCasoVisto');   // audiencia: vio 3:30 del caso
     }
     try{ localStorage.setItem(LOCK_KEY, '1'); }catch(e){}
   }
-  try{ if(localStorage.getItem(LOCK_KEY) === '1') unlock(false); }catch(e){}
+  function casoVisto(){
+    if(casoVistoOk) return;
+    casoVistoOk = true;
+    fbq('trackCustom', 'VideoCasoVisto');     // audiencia: vio 3:30 del caso (con o sin bloqueo)
+  }
+  var yaDesbloqueada = false;
+  try{ yaDesbloqueada = localStorage.getItem(LOCK_KEY) === '1'; }catch(e){}
+  if(C.BLOQUEAR_FICHA && !yaDesbloqueada) lockForm();
   // Si Vimeo no carga, no dejamos la ficha bloqueada para siempre
   setTimeout(function(){ if(!window.Vimeo) unlock(false); }, 12000);
 
@@ -622,7 +657,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   document.querySelectorAll('[data-cta="caso"]').forEach(function(a){
     a.addEventListener('click', function(e){
       e.preventDefault();
-      dl('click_ver_caso', {origen: a.closest('.lock') ? 'ficha' : 'bienvenida'});
+      dl('click_ver_caso', {origen: a.closest('.ficha') ? 'ficha' : 'bienvenida'});
       var target = document.getElementById('caso-video');
       target.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'center'});
       if(casoPlayer){
@@ -689,10 +724,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           if(last !== null){ var delta = d.seconds - last; if(delta > 0 && delta < 2) watched += delta; }
           last = d.seconds;
           if(d.duration){ [25, 50, 75, 100].forEach(function(h){ if(!hitos[h] && d.seconds / d.duration * 100 >= (h === 100 ? 97 : h)){ hitos[h] = true; dl('video_caso_progreso', {porcentaje: h}); } }); }
+          if(watched >= needed) casoVisto();
           if(isLocked){ lockProgress(watched, needed); if(watched >= needed) unlock(true); }
         });
         st.p.on('seeked', function(d){ last = d.seconds; });
-        st.p.on('ended', function(){ if(isLocked && watched >= needed - 10) unlock(true); });
+        st.p.on('ended', function(){ if(watched >= needed - 10){ casoVisto(); if(isLocked) unlock(true); } });
         st.p.on('error', function(){ unlock(false); });
       }
 
