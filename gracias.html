@@ -61,7 +61,7 @@ h1{margin-top:18px;font-size:clamp(32px,5vw,54px);line-height:1.04;letter-spacin
 .lead{margin-top:16px;font-size:19px;color:var(--muted);max-width:56ch}
 
 .tasks{list-style:none;margin:44px 0 0;display:grid;gap:18px;counter-reset:t}
-.task{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px;display:grid;grid-template-columns:1fr;gap:18px;align-items:start}
+.task{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px;display:grid;grid-template-columns:44px minmax(0,1fr);gap:18px;align-items:start}
 .task .num{width:44px;height:44px;border-radius:50%;background:var(--pine);color:var(--white);font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center}
 .task h2{font-size:22px;letter-spacing:-.02em;line-height:1.2}
 .task p{margin-top:8px;color:var(--muted)}
@@ -73,18 +73,34 @@ h1{margin-top:18px;font-size:clamp(32px,5vw,54px);line-height:1.04;letter-spacin
 .video-ph .play{position:absolute;top:50%;left:50%;width:60px;height:60px;margin:-30px 0 0 -30px;border-radius:50%;background:var(--amber)}
 .video-ph .play::after{content:"";position:absolute;left:24px;top:18px;border-left:18px solid var(--pine-deep);border-top:12px solid transparent;border-bottom:12px solid transparent}
 
-.prep{margin-top:56px;padding:32px;border-radius:var(--radius-lg);background:var(--pine);color:var(--white)}
-.prep h2{font-size:24px;letter-spacing:-.02em}
-.prep ul{list-style:none;margin-top:16px;display:grid;gap:12px}
-.prep li{padding-left:26px;position:relative;color:#E4EEEA}
-.prep li::before{content:"";position:absolute;left:0;top:7px;width:13px;height:7px;border-left:2.5px solid var(--amber);border-bottom:2.5px solid var(--amber);transform:rotate(-45deg)}
 
+/* Testimonios */
+.testimonios{margin-top:64px}
+.testimonios > h2{font-size:clamp(26px,3.6vw,34px);line-height:1.1;letter-spacing:-.03em;font-weight:800;max-width:22ch;text-wrap:balance}
+.testimonios > p{margin-top:10px;color:var(--muted);max-width:56ch}
+.testimonio{margin-top:40px;display:grid;gap:16px}
+.testimonio h3{font-size:20px;letter-spacing:-.02em;line-height:1.25}
+.testimonio h3 span{display:block;font-size:15px;font-weight:500;color:var(--muted);letter-spacing:0;margin-top:2px}
+.t-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.t-stat{border-radius:16px;padding:18px 20px;background:var(--white);border:1px solid var(--line)}
+.t-stat b{display:block;white-space:nowrap;font-size:clamp(24px,3vw,30px);font-weight:800;letter-spacing:-.03em;line-height:1.1;color:var(--pine);font-variant-numeric:tabular-nums}
+.t-stat span{display:block;margin-top:4px;font-size:15px;color:var(--muted)}
+.t-stat.main{background:var(--amber);border-color:var(--amber)}
+.t-stat.main b{color:var(--ink)}
+.t-stat.main span{color:#3A2A0C}
+.yt{position:relative;width:100%;max-width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:var(--pine-deep)}
+.yt.vertical{aspect-ratio:9/16;max-width:360px}
+.yt > div, .yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt-sound{position:absolute;left:50%;bottom:58px;transform:translateX(-50%);z-index:2;font:inherit;font-weight:700;font-size:15px;padding:10px 16px;border:0;border-radius:999px;background:var(--amber);color:var(--ink);cursor:pointer;box-shadow:0 8px 24px -8px rgba(0,0,0,.5);white-space:nowrap}
+.yt-sound[hidden]{display:none}
 footer{margin-top:72px;padding:32px 0 48px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
 @media (max-width:520px){
   .wrap{padding:0 16px}
   .task{grid-template-columns:1fr;padding:22px}
   .btn{width:100%}
-  .prep{padding:24px}
+  .t-stats{gap:10px}
+  .t-stat{padding:16px 14px}
+  .t-stat b{font-size:21px}
 }
 </style>
 <!-- Microsoft Clarity -->
@@ -106,26 +122,57 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <main class="wrap">
   <p class="status" role="status"><i aria-hidden="true"></i>Tu diagnóstico todavía no está confirmado</p>
   <h1 id="titulo">Reservaste tu horario. Falta un paso para confirmarlo.</h1>
-  <p class="lead">Confirmo cada diagnóstico por WhatsApp para asegurarme de que el horario te sirve. Mandame el mensaje ahora y queda listo.</p>
+  <p class="lead">Confirmo cada diagnóstico por WhatsApp para asegurarme de que el horario te sirve. Hacé estos dos pasos ahora y queda listo.</p>
 
   <ol class="tasks">
     <li class="task">
+      <span class="num" aria-hidden="true">1</span>
       <div>
         <h2>Confirmá por WhatsApp</h2>
         <p>Te voy a escribir para confirmar tu horario. Si querés adelantarte, mandame vos el mensaje ahora con el botón: así ya quedás confirmado.</p>
         <a class="btn" id="wa" href="#" target="_blank" rel="noopener">Confirmar por WhatsApp</a>
       </div>
     </li>
+    <li class="task">
+      <span class="num" aria-hidden="true">2</span>
+      <div>
+        <h2>Mirá este video antes de la llamada</h2>
+        <p>Te cuento qué vamos a revisar y qué tenés que tener a mano, para que aprovechemos el tiempo.</p>
+        <div class="video">
+          <iframe src="https://player.vimeo.com/video/1248703012?h=d4b7ccbf83&amp;title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;playsinline=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Video de preparación para el diagnóstico"></iframe>
+        </div>
+      </div>
+    </li>
   </ol>
 
-  <section class="prep" aria-labelledby="prep-title">
-    <h2 id="prep-title">Para la llamada, tené a mano</h2>
-    <ul>
-      <li>Cuánto cuesta tu programa y cuántos clientes cerraste en los últimos 3 meses.</li>
-      <li>De dónde te llegaron esos clientes.</li>
-      <li>Si hiciste anuncios: acceso para mostrarme qué campañas corriste.</li>
-      <li>Un lugar tranquilo con buena conexión: son 45 minutos por videollamada.</li>
-    </ul>
+
+  <section class="testimonios" aria-labelledby="test-title">
+    <h2 id="test-title">Antes de la llamada, escuchá a quienes ya lo hicieron</h2>
+    <p>Dos profesionales que ya vendían su programa y armaron su sistema de adquisición conmigo.</p>
+
+    <article class="testimonio">
+      <h3>Ailén<span>Profesora de inglés para profesionales senior</span></h3>
+      <div class="t-stats">
+        <div class="t-stat main"><b>+USD 30.000</b><span>facturados</span></div>
+        <div class="t-stat"><b>+30</b><span>ventas cerradas</span></div>
+      </div>
+      <div class="yt" data-yt="SOGvmpQRn7U" data-nombre="Ailén">
+        <div></div>
+        <button type="button" class="yt-sound" hidden>Tocá para escuchar</button>
+      </div>
+    </article>
+
+    <article class="testimonio">
+      <h3>Nina<span>Nutricionista, programa Reset Metabólico</span></h3>
+      <div class="t-stats">
+        <div class="t-stat main"><b>+USD 30.000</b><span>facturados</span></div>
+        <div class="t-stat"><b>+30</b><span>pacientes cerrados</span></div>
+      </div>
+      <div class="yt" data-yt="s2mYadycbqo" data-nombre="Nina">
+        <div></div>
+        <button type="button" class="yt-sound" hidden>Tocá para escuchar</button>
+      </div>
+    </article>
   </section>
 
 </main>
@@ -144,6 +191,80 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   wa.href = 'https://wa.me/' + C.WHATSAPP_NUMERO + '?text=' + encodeURIComponent(msg);
   // Evento propio, separado del "Contact" de la landing: mide quién confirma la llamada
   wa.addEventListener('click', function(){ fbq('trackCustom', 'ConfirmacionWhatsApp'); dl('confirmacion_whatsapp'); });
+})();
+</script>
+<!-- Testimonios en YouTube: sin subtítulos, autoplay al estar en pantalla, de a uno -->
+<script>
+(function(){
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var players = [];
+  function dl(ev, p){ window.dataLayer = window.dataLayer || []; var o = {event: ev}; for(var k in (p||{})) o[k] = p[k]; window.dataLayer.push(o); }
+
+  window.onYouTubeIframeAPIReady = function(){
+    document.querySelectorAll('.yt[data-yt]').forEach(function(box){
+      var st = {box: box, sound: box.querySelector('.yt-sound'), ready:false, playing:false, byUs:false, userPaused:false, ended:false, inView:false, started:false};
+      st.p = new YT.Player(box.querySelector('div'), {
+        host: 'https://www.youtube-nocookie.com',
+        videoId: box.dataset.yt,
+        playerVars: {rel: 0, playsinline: 1, cc_load_policy: 0, iv_load_policy: 3, modestbranding: 1, hl: 'es'},
+        events: {
+          onReady: function(){
+            st.ready = true;
+            try{ st.p.unloadModule('captions'); st.p.unloadModule('cc'); }catch(e){}
+            autoplay(st);
+          },
+          onStateChange: function(e){
+            if(e.data === YT.PlayerState.PLAYING){
+              st.playing = true;
+              try{ st.p.unloadModule('captions'); st.p.unloadModule('cc'); }catch(err){}
+              if(!st.started){ st.started = true; dl('testimonio_play', {clienta: box.dataset.nombre}); }
+              players.forEach(function(o){ if(o !== st && o.playing){ o.byUs = true; o.p.pauseVideo(); } });
+            } else if(e.data === YT.PlayerState.PAUSED){
+              st.playing = false;
+              if(st.byUs){ st.byUs = false; } else { st.userPaused = true; }
+            } else if(e.data === YT.PlayerState.ENDED){
+              st.playing = false; st.ended = true; next();
+            }
+          }
+        }
+      });
+      st.sound.addEventListener('click', function(){
+        st.p.unMute(); st.p.setVolume(100); st.sound.hidden = true;
+        st.userPaused = false; st.p.playVideo();
+      });
+      players.push(st);
+    });
+    observe();
+  };
+
+  function anotherPlaying(st){ return players.some(function(o){ return o !== st && o.playing; }); }
+  function autoplay(st){
+    if(reduced || !st.ready || !st.inView || st.playing || st.userPaused || st.ended || anotherPlaying(st)) return;
+    // Los navegadores solo permiten arrancar solo en silencio: se ofrece activar el sonido
+    if(!st.started){ st.p.mute(); st.sound.hidden = false; }
+    st.p.playVideo();
+  }
+  function next(){
+    var n = players.find(function(o){ return o.inView && !o.ended && !o.userPaused; });
+    if(n) autoplay(n);
+  }
+  function observe(){
+    if(!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        var st = players.find(function(o){ return o.box === e.target; });
+        if(!st) return;
+        st.inView = e.intersectionRatio >= 0.5;
+        if(st.inView) autoplay(st);
+        else if(e.intersectionRatio < 0.2 && st.playing){ st.byUs = true; st.p.pauseVideo(); next(); }
+      });
+    }, {threshold: [0, 0.2, 0.5]});
+    players.forEach(function(st){ io.observe(st.box); });
+  }
+
+  var tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
 })();
 </script>
 </body>
